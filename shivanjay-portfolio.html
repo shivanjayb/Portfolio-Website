@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shivanjay Bajpai — Software Engineer</title>
+<meta name="description" content="Portfolio of Shivanjay Prakash Bajpai — Computer Science & Design engineer building full-stack and AI-driven systems." />
+
+<!-- Link previews on LinkedIn / WhatsApp / email (update og:url after you deploy) -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Shivanjay Bajpai — Software Engineer" />
+<meta property="og:description" content="Full-stack & applied-AI engineer. B.Tech CS & Design, Class of 2027. UDAY · Nashik Skills Live · Clothesly · 2× TEDx Organizer." />
+<meta property="og:url" content="https://shivanjayb.github.io/" />
+
+<!-- Favicon: SB monogram -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230E6B4F'/%3E%3Ctext x='32' y='42' font-family='monospace' font-size='28' font-weight='bold' fill='white' text-anchor='middle'%3ESB%3C/text%3E%3C/svg%3E" />
+
+<!-- Structured data so Google indexes you as a person, not just a page -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Shivanjay Prakash Bajpai",
+  "jobTitle": "Software Engineer",
+  "email": "mailto:shivanjayprakashbajpai@gmail.com",
+  "url": "https://shivanjayb.github.io/",
+  "sameAs": ["https://github.com/shivanjayb", "https://linkedin.com/in/shivanjay-bajpai"],
+  "alumniOf": "K.K. Wagh Institute of Engineering Education and Research"
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+/* ============================================================================
+   ✏️  EDIT EVERYTHING BELOW — THIS IS THE ONLY PART YOU NEED TO TOUCH
+   ----------------------------------------------------------------------------
+   The whole website reads from this one DATA object.
+   - Change any text between the quotes "..."
+   - Add a project? Copy one { ... } block inside projects: [ ... ] and edit it.
+   - Delete anything you don't want (remove the whole { ... } block + comma).
+   - Save the file, refresh the browser. Done.
+   ============================================================================ */
+const DATA = {
+
+  /* ---------- 1. IDENTITY ---------- */
+  name: "Shivanjay Bajpai",
+  fullName: "Shivanjay Prakash Bajpai",
+  headline: "Software engineer who ships full-stack and AI-driven systems.",
+  subline: "B.Tech, Computer Science & Design · K.K. Wagh Institute of Engineering, Nashik · Class of 2027",
+  location: "Nashik, Maharashtra, India",
+  email: "shivanjayprakashbajpai@gmail.com",
+  phone: "+91 7020637824",
+  links: {
+    github: "https://github.com/shivanjayb",
+    linkedin: "https://linkedin.com/in/shivanjay-bajpai",
+    /* Put a public link to your resume PDF here (Google Drive / GitHub / hosting).
+       Leave "" to hide the button. */
+    resumeUrl: ""
+  },
+
+  /* ---------- 2. SNAPSHOT (the datasheet recruiters scan in 10 seconds) ---------- */
+  snapshot: [
+    { label: "Seeking",      value: "SDE / Software Engineer — 2027 grad roles & internships" },
+    { label: "Focus",        value: "Backend · Full-stack · Applied AI / Computer Vision" },
+    { label: "Core stack",   value: "Python · C++ · JavaScript · SQL · React · Flutter · AWS" },
+    { label: "Graduation",   value: "June 2027 · CGPA 7.88" },
+    { label: "Location",     value: "Nashik, India · Open to relocation" },
+    { label: "Leadership",   value: "2× TEDx Organizer & Licensee · teams of 50+" }
+  ],
+
+  /* ---------- 3. ABOUT ---------- */
+  about: [
+    "I build software end to end — APIs, databases, cloud sync, and the interfaces on top of them. My recent work sits where engineering meets applied AI: real-time computer vision pipelines, recommendation systems, and data platforms that process large candidate datasets.",
+    "Outside of code, I run things. I introduced the first TEDx platform at my institute and ran it two years in a row — 50+ person cross-functional teams, 700+ attendees, sponsorship negotiations, and a budget I had to defend. That taught me the part of engineering no course covers: shipping under real constraints, with real stakeholders."
+  ],
+
+  /* ---------- 4. PROJECTS (first one = your flagship, shown biggest) ---------- */
+  projects: [
+    {
+      id: "P-01",
+      name: "UDAY",
+      tag: "AI Sports Assessment Platform",
+      period: "Jul – Sep 2025",
+      stack: ["Python", "OpenCV", "MediaPipe", "AWS", "MongoDB"],
+      problem: "Sports talent assessment in India depends on expensive equipment and manual judgment — inaccessible to most athletes.",
+      bullets: [
+        "Built a low-latency analytics engine using MediaPipe for real-time skeletal tracking, pose estimation, and cheat-resistant performance benchmarking from a single phone camera.",
+        "Designed an offline-first hybrid architecture: heavy image processing runs locally, with state synchronized to AWS and MongoDB clusters — built for low-connectivity rural environments.",
+        "Cleared the Smart India Hackathon 2025 institute-level qualifier (AI Innovation track) with this project."
+      ],
+      links: { code: "", demo: "" }  /* add GitHub / demo URLs, or leave "" */
+    },
+    {
+      id: "P-02",
+      name: "Nashik Skills Live",
+      tag: "Skill Intelligence Platform",
+      period: "Feb – Apr 2026",
+      stack: ["Full-stack", "SQL", "AI Matching", "REST APIs"],
+      problem: "Local employers and job-seekers in Nashik had no shared, data-driven view of skill supply and demand.",
+      bullets: [
+        "Engineered an employability and analytics platform with normalized relational schemas and backend pipelines that process large-scale candidate datasets.",
+        "Integrated AI-driven evaluation endpoints that cut manual assessment overhead for partner employers."
+      ],
+      links: { code: "", demo: "" }
+    },
+    {
+      id: "P-03",
+      name: "Clothesly",
+      tag: "AI Wardrobe Recommendation App",
+      period: "Jan – Apr 2026",
+      stack: ["Flutter", "Supabase", "REST APIs", "OAuth"],
+      problem: "Daily outfit decisions ignore the one variable that matters most — live weather.",
+      bullets: [
+        "Architected a mobile decision-support app combining real-time climate APIs with algorithmic matching for personalized styling recommendations.",
+        "Built a decoupled frontend–backend architecture on Supabase with secure OAuth and modular state management for low-latency retrieval."
+      ],
+      links: { code: "", demo: "" }
+    }
+  ],
+
+  /* ---------- 5. EXPERIENCE & LEADERSHIP ---------- */
+  experience: [
+    /* ── FinIQ block, ready when you are ─────────────────────────────
+       To show it: delete the slash-star above this line and the
+       star-slash at the end of the block, then edit the details.
+    {
+      role: "Software Development Intern",
+      org: "FinIQ Consulting — Structured Products & Derivatives",
+      period: "2026 — Present",
+      bullets: [
+        "Describe one concrete thing you built or shipped.",
+        "Describe the tech (C#/Java/Angular/MSSQL) and the business impact."
+      ]
+    },
+    ─────────────────────────────────────────────────────────────────── */
+    {
+      role: "Organizer & Licensee",
+      org: "TEDxKKWIEER",
+      period: "Oct 2024 — Present",
+      bullets: [
+        "Founded and led the institute's first TEDx platform across two consecutive editions (2025 & 2026), directing 50+ members across curation, sponsorships, branding, marketing, and operations for 700+ attendees.",
+        "Led B2B sponsorship negotiations and budget planning — 80%+ growth in total event income and 125%+ increase in sponsorship revenue, with controlled operational spend."
+      ]
+    },
+    {
+      role: "Head of Finance & Logistics",
+      org: "Nashik Youth Model United Nations",
+      period: "Apr — Jun 2025",
+      bullets: [
+        "Ran end-to-end logistics, vendor contract negotiations, and resource allocation for a premier non-institutional conference hosting 300+ delegates."
+      ]
+    }
+  ],
+
+  /* ---------- 6. SKILLS ---------- */
+  skills: [
+    { group: "Languages",          items: ["C++", "Python", "JavaScript", "SQL (Advanced)", "C", "HTML/CSS"] },
+    { group: "Frameworks & Tools", items: ["React.js", "Node.js", "Express.js", "Flutter", "OpenCV", "Flask"] },
+    { group: "Data & Cloud",       items: ["PostgreSQL", "MySQL", "MongoDB", "Supabase", "AWS"] },
+    { group: "Core CS",            items: ["Data Structures & Algorithms", "OOP", "System Design", "API Design"] },
+    { group: "Business",           items: ["Stakeholder Management", "P&L Forecasting", "Cross-functional Leadership"] }
+  ],
+
+  /* ---------- 7. EDUCATION ---------- */
+  education: [
+    { school: "K.K. Wagh Institute of Engineering Education & Research", detail: "B.Tech, Computer Science & Design Engineering — CGPA 7.88", period: "2023 — 2027" },
+    { school: "Sukhdev Jr. College, Nashik", detail: "HSC (Class 12) — 71.83%", period: "2020 — 2022" },
+    { school: "Ryan International School, Nashik", detail: "ICSE (Class 10) — 85.80%", period: "2020" }
+  ],
+
+  /* ---------- 8. ACHIEVEMENTS & CERTIFICATIONS ---------- */
+  achievements: [
+    "Smart India Hackathon 2025 — cleared institute-level qualifier, AI Innovation (Team UDAY)",
+    "Google Cloud Arcade Program — Milestone Achiever",
+    "The Complete Web Development Bootcamp — Udemy",
+    "ChatGPT Prompt Engineering — DeepLearning.AI",
+    "iLike Certificates: Web Designing & Digital Marketing — MKCL Ltd."
+  ]
+};
+/* ============================================================================
+   ✋  STOP — you don't need to edit anything below this line.
+   ============================================================================ */
+</script>
+
+<style>
+:root{
+  --paper:#F5F6F2;
+  --paper-2:#EDEFE8;
+  --ink:#141814;
+  --ink-2:#3B423C;
+  --muted:#6B7370;
+  --line:#D3D8CF;
+  --line-strong:#AEB6AC;
+  --accent:#0E6B4F;
+  --accent-soft:#DCEAE2;
+  --amber:#B26A00;
+  --display:"Archivo",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){ html{scroll-behavior:auto} }
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--body);
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+
+/* ---------- layout: fixed rail + scrolling content ---------- */
+.frame{display:grid;grid-template-columns:300px 1fr;min-height:100vh;max-width:1280px;margin:0 auto}
+.rail{
+  position:sticky;top:0;height:100vh;
+  border-right:1px solid var(--line);
+  padding:44px 32px;
+  display:flex;flex-direction:column;gap:36px;
+}
+.content{padding:44px 56px 96px;min-width:0}
+
+/* ---------- rail ---------- */
+.brand .kicker{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:10px}
+.brand h1{font-family:var(--display);font-weight:900;font-size:26px;line-height:1.1;letter-spacing:-.01em}
+.brand .loc{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:10px}
+
+nav.toc{display:flex;flex-direction:column;gap:2px}
+nav.toc a{
+  font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;
+  text-decoration:none;color:var(--muted);
+  padding:8px 0 8px 18px;border-left:2px solid transparent;
+  transition:color .15s,border-color .15s;
+}
+nav.toc a:hover{color:var(--ink)}
+nav.toc a.active{color:var(--accent);border-left-color:var(--accent)}
+
+.rail-foot{margin-top:auto;display:flex;flex-direction:column;gap:14px}
+.rail-links{display:flex;flex-direction:column;gap:8px}
+.rail-links a{font-family:var(--mono);font-size:12.5px;text-decoration:none;color:var(--ink-2);display:flex;align-items:center;gap:8px}
+.rail-links a:hover{color:var(--accent)}
+.rail-links a::before{content:"↗";color:var(--accent);font-size:11px}
+.status{
+  font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--accent);display:flex;align-items:center;gap:8px;
+}
+.status .dot{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 2.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+@media (prefers-reduced-motion:reduce){ .status .dot{animation:none} }
+
+/* ---------- section scaffolding ---------- */
+section{padding-top:64px}
+section:first-of-type{padding-top:0}
+.sec-head{
+  display:flex;align-items:baseline;gap:14px;
+  border-bottom:2px solid var(--ink);
+  padding-bottom:10px;margin-bottom:28px;
+}
+.sec-head .idx{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em}
+.sec-head h2{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:.01em;text-transform:uppercase}
+.sec-head .count{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted)}
+
+/* ---------- hero ---------- */
+.hero h2{
+  font-family:var(--display);font-weight:900;
+  font-size:clamp(34px,4.6vw,54px);
+  line-height:1.04;letter-spacing:-.02em;
+  max-width:17ch;
+}
+.hero h2 em{font-style:normal;color:var(--accent)}
+.hero .sub{margin-top:18px;font-size:16.5px;color:var(--ink-2);max-width:56ch}
+.hero-cta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
+.btn{
+  font-family:var(--mono);font-size:13px;letter-spacing:.05em;text-decoration:none;
+  padding:11px 20px;border:1.5px solid var(--ink);color:var(--ink);
+  transition:background .15s,color .15s;display:inline-block;
+}
+.btn:hover{background:var(--ink);color:var(--paper)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#0a563f;border-color:#0a563f}
+
+/* ---------- snapshot datasheet (signature element) ---------- */
+.datasheet{
+  margin-top:44px;
+  border:1.5px solid var(--ink);
+  background:#FBFCF9;
+}
+.datasheet-head{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 18px;border-bottom:1.5px solid var(--ink);
+  font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+}
+.datasheet-head .l{color:var(--accent);font-weight:600}
+.datasheet-head .r{color:var(--muted)}
+.datasheet-grid{display:grid;grid-template-columns:1fr 1fr}
+.ds-cell{
+  padding:16px 18px;border-top:1px solid var(--line);
+}
+.ds-cell:nth-child(-n+2){border-top:none}
+.ds-cell:nth-child(odd){border-right:1px solid var(--line)}
+.ds-cell .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.ds-cell .val{font-size:14.5px;font-weight:500;color:var(--ink)}
+
+/* ---------- about ---------- */
+.about p{max-width:64ch;color:var(--ink-2);font-size:16px}
+.about p+p{margin-top:16px}
+
+/* ---------- projects (ledger rows) ---------- */
+.project{
+  border:1px solid var(--line-strong);
+  background:#FBFCF9;
+  margin-bottom:22px;
+}
+.project.flagship{border:1.5px solid var(--ink)}
+.proj-top{
+  display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+  padding:18px 22px 0;
+}
+.proj-id{font-family:var(--mono);font-size:12px;color:var(--accent);letter-spacing:.1em}
+.proj-name{font-family:var(--display);font-weight:800;font-size:24px;letter-spacing:-.01em}
+.proj-tag{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.proj-period{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap}
+.flag-chip{
+  font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;
+  background:var(--accent);color:#fff;padding:3px 8px;
+}
+.proj-problem{
+  padding:12px 22px 0;font-size:14.5px;color:var(--ink-2);font-style:italic;max-width:70ch;
+}
+.proj-body{padding:14px 22px 18px}
+.proj-body ul{list-style:none}
+.proj-body li{
+  position:relative;padding-left:22px;margin-bottom:9px;
+  font-size:15px;color:var(--ink-2);max-width:74ch;
+}
+.proj-body li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+.proj-foot{
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+  padding:12px 22px 16px;border-top:1px solid var(--line);
+}
+.chip{
+  font-family:var(--mono);font-size:11.5px;
+  border:1px solid var(--line-strong);padding:3px 10px;color:var(--ink-2);
+  background:var(--paper);
+}
+.proj-links{margin-left:auto;display:flex;gap:16px}
+.proj-links a{font-family:var(--mono);font-size:12px;color:var(--accent);text-decoration:none;letter-spacing:.05em}
+.proj-links a:hover{text-decoration:underline}
+
+/* ---------- experience ---------- */
+.xp{display:grid;grid-template-columns:170px 1fr;gap:20px;padding:22px 0;border-bottom:1px solid var(--line)}
+.xp:first-of-type{padding-top:4px}
+.xp-when{font-family:var(--mono);font-size:12px;color:var(--muted);padding-top:4px}
+.xp h3{font-family:var(--display);font-weight:800;font-size:18px}
+.xp .org{font-family:var(--mono);font-size:12.5px;color:var(--accent);margin:2px 0 10px;letter-spacing:.04em}
+.xp ul{list-style:none}
+.xp li{position:relative;padding-left:22px;margin-bottom:8px;font-size:15px;color:var(--ink-2);max-width:72ch}
+.xp li::before{content:"—";position:absolute;left:0;color:var(--accent)}
+
+/* ---------- skills ---------- */
+.skill-row{display:grid;grid-template-columns:190px 1fr;gap:18px;padding:16px 0;border-bottom:1px solid var(--line);align-items:start}
+.skill-row .g{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding-top:5px}
+.skill-row .items{display:flex;flex-wrap:wrap;gap:8px}
+
+/* ---------- education & achievements ---------- */
+.edu{display:grid;grid-template-columns:1fr auto;gap:16px;padding:15px 0;border-bottom:1px solid var(--line)}
+.edu b{font-weight:600;display:block;font-size:15.5px}
+.edu span{color:var(--muted);font-size:14px}
+.edu .when{font-family:var(--mono);font-size:12px;color:var(--muted);white-space:nowrap;padding-top:3px}
+.ach{list-style:none}
+.ach li{position:relative;padding:10px 0 10px 26px;border-bottom:1px solid var(--line);font-size:15px;color:var(--ink-2)}
+.ach li::before{content:"◆";position:absolute;left:2px;color:var(--accent);font-size:10px;top:15px}
+
+/* ---------- contact ---------- */
+.contact{border:1.5px solid var(--ink);background:#FBFCF9;padding:34px;margin-top:8px}
+.contact h3{font-family:var(--display);font-weight:900;font-size:clamp(24px,3vw,32px);letter-spacing:-.01em;max-width:22ch}
+.contact p{margin-top:12px;color:var(--ink-2);max-width:56ch}
+.contact-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
+.contact .mono{font-family:var(--mono);font-size:13px;color:var(--muted);margin-top:20px}
+
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer span{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.05em}
+
+/* ---------- micro-interactions ---------- */
+.project{transition:border-color .15s, box-shadow .15s, transform .15s}
+.project:hover{border-color:var(--ink);box-shadow:4px 4px 0 var(--accent-soft);transform:translate(-1px,-1px)}
+@media (prefers-reduced-motion:reduce){ .project{transition:none} .project:hover{transform:none} }
+.btn.copy{cursor:pointer;background:var(--paper);font-family:var(--mono)}
+.btn.copy.copied{background:var(--accent);border-color:var(--accent);color:#fff}
+
+/* ---------- skip link (keyboard users) ---------- */
+.skip{
+  position:absolute;left:-9999px;top:0;z-index:10;
+  background:var(--ink);color:#fff;padding:10px 16px;
+  font-family:var(--mono);font-size:13px;text-decoration:none;
+}
+.skip:focus{left:0}
+
+/* ---------- print: recruiters save-as-PDF, make it clean ---------- */
+@media print{
+  :root{--paper:#fff;--paper-2:#fff}
+  body{font-size:12px}
+  .rail{display:none}
+  .frame{display:block;max-width:100%}
+  .content{padding:0}
+  section{padding-top:24px;break-inside:avoid}
+  .hero-cta,.status,.reveal{opacity:1 !important;transform:none !important}
+  .hero-cta,footer span:last-child{display:none}
+  .project,.datasheet,.contact{box-shadow:none !important;border-color:#000}
+  .proj-links a::after{content:" (" attr(href) ")";font-size:10px;color:#555}
+  .contact h3{font-size:20px}
+}
+
+/* ---------- reveal on scroll ---------- */
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none} }
+
+/* ---------- responsive ---------- */
+@media (max-width:960px){
+  .frame{grid-template-columns:1fr}
+  .rail{
+    position:static;height:auto;border-right:none;border-bottom:1px solid var(--line);
+    padding:28px 22px;gap:20px;
+  }
+  nav.toc{flex-direction:row;flex-wrap:wrap;gap:4px 18px}
+  nav.toc a{border-left:none;padding:4px 0;border-bottom:2px solid transparent}
+  nav.toc a.active{border-bottom-color:var(--accent)}
+  .rail-foot{margin-top:0}
+  .rail-links{flex-direction:row;flex-wrap:wrap;gap:16px}
+  .content{padding:36px 22px 72px}
+  .datasheet-grid{grid-template-columns:1fr}
+  .ds-cell{border-right:none !important}
+  .ds-cell:nth-child(2){border-top:1px solid var(--line)}
+  .xp,.skill-row{grid-template-columns:1fr;gap:6px}
+  .proj-period{margin-left:0;width:100%}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#top">Skip to content</a>
+
+<div class="frame">
+
+  <!-- ============ LEFT RAIL ============ -->
+  <aside class="rail">
+    <div class="brand">
+      <span class="kicker">Software Engineer · 2027</span>
+      <h1 id="rail-name"></h1>
+      <div class="loc" id="rail-loc"></div>
+    </div>
+
+    <nav class="toc" aria-label="Sections">
+      <a href="#top">Snapshot</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+
+    <div class="rail-foot">
+      <div class="rail-links" id="rail-links"></div>
+      <div class="status"><span class="dot"></span>Open to opportunities</div>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main class="content">
+
+    <section class="hero" id="top">
+      <h2 id="hero-headline"></h2>
+      <p class="sub" id="hero-sub"></p>
+      <div class="hero-cta" id="hero-cta"></div>
+
+      <!-- signature element: the candidate datasheet -->
+      <div class="datasheet reveal">
+        <div class="datasheet-head">
+          <span class="l">Candidate Datasheet</span>
+          <span class="r" id="ds-ref"></span>
+        </div>
+        <div class="datasheet-grid" id="ds-grid"></div>
+      </div>
+    </section>
+
+    <section class="about reveal" id="about">
+      <div class="sec-head"><span class="idx">01</span><h2>About</h2></div>
+      <div id="about-body"></div>
+    </section>
+
+    <section class="reveal" id="projects">
+      <div class="sec-head"><span class="idx">02</span><h2>Selected Projects</h2><span class="count" id="proj-count"></span></div>
+      <div id="proj-list"></div>
+    </section>
+
+    <section class="reveal" id="experience">
+      <div class="sec-head"><span class="idx">03</span><h2>Experience &amp; Leadership</h2></div>
+      <div id="xp-list"></div>
+    </section>
+
+    <section class="reveal" id="skills">
+      <div class="sec-head"><span class="idx">04</span><h2>Skills</h2></div>
+      <div id="skill-list"></div>
+    </section>
+
+    <section class="reveal" id="education">
+      <div class="sec-head"><span class="idx">05</span><h2>Education</h2></div>
+      <div id="edu-list"></div>
+      <div class="sec-head" style="margin-top:40px"><span class="idx">06</span><h2>Achievements &amp; Certifications</h2></div>
+      <ul class="ach" id="ach-list"></ul>
+    </section>
+
+    <section class="reveal" id="contact">
+      <div class="sec-head"><span class="idx">07</span><h2>Contact</h2></div>
+      <div class="contact">
+        <h3>Hiring for 2027? Let's talk.</h3>
+        <p>I'm looking for software engineering roles and internships where I can own systems end to end — backend, full-stack, or applied AI. Fastest way to reach me is email; I reply within a day.</p>
+        <div class="contact-row" id="contact-row"></div>
+        <div class="mono" id="contact-meta"></div>
+      </div>
+      <footer>
+        <span id="foot-left"></span>
+        <span>Built by hand · No template</span>
+      </footer>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ============================================================================
+   RENDERING — turns the DATA object into the page. No need to edit.
+   ============================================================================ */
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* rail */
+$("rail-name").textContent = DATA.name;
+$("rail-loc").textContent = DATA.location;
+const railLinks = [];
+if (DATA.links.github)   railLinks.push(`<a href="${esc(DATA.links.github)}" target="_blank" rel="noopener">GitHub</a>`);
+if (DATA.links.linkedin) railLinks.push(`<a href="${esc(DATA.links.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`);
+railLinks.push(`<a href="mailto:${esc(DATA.email)}">Email</a>`);
+$("rail-links").innerHTML = railLinks.join("");
+
+/* hero */
+const words = DATA.headline.split(" ");
+const last2 = words.splice(-2).join(" ");
+$("hero-headline").innerHTML = `${esc(words.join(" "))} <em>${esc(last2)}</em>`;
+$("hero-sub").textContent = DATA.subline;
+let cta = `<a class="btn primary" href="mailto:${esc(DATA.email)}">Get in touch</a>`;
+if (DATA.links.resumeUrl) cta += `<a class="btn" href="${esc(DATA.links.resumeUrl)}" target="_blank" rel="noopener">Download résumé</a>`;
+$("hero-cta").innerHTML = cta;
+
+/* datasheet */
+$("ds-ref").textContent = "REF / " + DATA.name.split(" ").map(w=>w[0]).join("").toUpperCase() + "-2027";
+$("ds-grid").innerHTML = DATA.snapshot.map(s => `
+  <div class="ds-cell">
+    <div class="lbl">${esc(s.label)}</div>
+    <div class="val">${esc(s.value)}</div>
+  </div>`).join("");
+
+/* about */
+$("about-body").innerHTML = DATA.about.map(p => `<p>${esc(p)}</p>`).join("");
+
+/* projects */
+$("proj-count").textContent = String(DATA.projects.length).padStart(2,"0") + " builds";
+$("proj-list").innerHTML = DATA.projects.map((p, i) => `
+  <article class="project ${i===0 ? "flagship" : ""} reveal">
+    <div class="proj-top">
+      <span class="proj-id">${esc(p.id)}</span>
+      <span class="proj-name">${esc(p.name)}</span>
+      <span class="proj-tag">${esc(p.tag)}</span>
+      ${i===0 ? '<span class="flag-chip">Flagship</span>' : ""}
+      <span class="proj-period">${esc(p.period)}</span>
+    </div>
+    ${p.problem ? `<p class="proj-problem">${esc(p.problem)}</p>` : ""}
+    <div class="proj-body">
+      <ul>${p.bullets.map(b => `<li>${esc(b)}</li>`).join("")}</ul>
+    </div>
+    <div class="proj-foot">
+      ${p.stack.map(s => `<span class="chip">${esc(s)}</span>`).join("")}
+      <span class="proj-links">
+        ${p.links.code ? `<a href="${esc(p.links.code)}" target="_blank" rel="noopener">CODE ↗</a>` : ""}
+        ${p.links.demo ? `<a href="${esc(p.links.demo)}" target="_blank" rel="noopener">DEMO ↗</a>` : ""}
+      </span>
+    </div>
+  </article>`).join("");
+
+/* experience */
+$("xp-list").innerHTML = DATA.experience.map(x => `
+  <div class="xp">
+    <div class="xp-when">${esc(x.period)}</div>
+    <div>
+      <h3>${esc(x.role)}</h3>
+      <div class="org">${esc(x.org)}</div>
+      <ul>${x.bullets.map(b => `<li>${esc(b)}</li>`).join("")}</ul>
+    </div>
+  </div>`).join("");
+
+/* skills */
+$("skill-list").innerHTML = DATA.skills.map(s => `
+  <div class="skill-row">
+    <div class="g">${esc(s.group)}</div>
+    <div class="items">${s.items.map(i => `<span class="chip">${esc(i)}</span>`).join("")}</div>
+  </div>`).join("");
+
+/* education + achievements */
+$("edu-list").innerHTML = DATA.education.map(e => `
+  <div class="edu">
+    <div><b>${esc(e.school)}</b><span>${esc(e.detail)}</span></div>
+    <div class="when">${esc(e.period)}</div>
+  </div>`).join("");
+$("ach-list").innerHTML = DATA.achievements.map(a => `<li>${esc(a)}</li>`).join("");
+
+/* contact */
+let crow = `<a class="btn primary" href="mailto:${esc(DATA.email)}">${esc(DATA.email)}</a>`;
+crow += `<button class="btn copy" id="copy-email" type="button">Copy email</button>`;
+if (DATA.links.linkedin) crow += `<a class="btn" href="${esc(DATA.links.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>`;
+if (DATA.links.github)   crow += `<a class="btn" href="${esc(DATA.links.github)}" target="_blank" rel="noopener">GitHub</a>`;
+$("contact-row").innerHTML = crow;
+$("copy-email").addEventListener("click", async () => {
+  try {
+    await navigator.clipboard.writeText(DATA.email);
+    const b = $("copy-email");
+    b.textContent = "Copied ✓"; b.classList.add("copied");
+    setTimeout(() => { b.textContent = "Copy email"; b.classList.remove("copied"); }, 1800);
+  } catch(e) { window.location.href = "mailto:" + DATA.email; }
+});
+$("contact-meta").textContent = `${DATA.phone} · ${DATA.location}`;
+$("foot-left").textContent = `© ${new Date().getFullYear()} ${DATA.fullName}`;
+
+/* scroll-spy for nav */
+const tocLinks = document.querySelectorAll("nav.toc a");
+const secs = [...tocLinks].map(a => document.querySelector(a.getAttribute("href")));
+const spy = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      tocLinks.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+    }
+  });
+}, { rootMargin: "-30% 0px -60% 0px" });
+secs.forEach(s => s && spy.observe(s));
+
+/* reveal on scroll */
+const rev = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); rev.unobserve(e.target); } });
+}, { threshold: 0.08 });
+document.querySelectorAll(".reveal").forEach(el => rev.observe(el));
+</script>
+</body>
+</html>
