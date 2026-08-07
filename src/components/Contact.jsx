@@ -1,178 +1,198 @@
-import React, { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Mail, Phone } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import contactBgVideo from '../assets/contact_assets/contact_bg.mp4';
 
-const Contact = () => {
-  const ref = useRef(null);
-  const [submitted, setSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    message: '',
-    permission: false
-  });
+const ContactSection = () => {
+    const formRef = useRef();
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [statusMessage, setStatusMessage] = useState({ text: '', type: '' });
 
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start end", "end start"]
-  });
+    const sendEmail = (e) => {
+        e.preventDefault();
+        
+        const formData = new FormData(formRef.current);
+        const name = formData.get('name');
+        const email = formData.get('email');
+        const message = formData.get('message');
+        
+        if (!name || !email || !message) {
+            setStatusMessage({ text: 'Please fill in all required fields.', type: 'error' });
+            return;
+        }
 
-  const y = useTransform(scrollYProgress, [0, 1], ["-20%", "30%"]);
+        setIsSubmitting(true);
+        setStatusMessage({ text: '', type: '' });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ firstName: '', lastName: '', email: '', message: '', permission: false });
-    }, 4000);
-  };
+        setTimeout(() => {
+            setIsSubmitting(false);
+            setStatusMessage({ text: 'Message sent successfully! Shivanjay will reply soon.', type: 'success' });
+            if (formRef.current) formRef.current.reset();
+        }, 1500);
+    };
 
-  return (
-    <section ref={ref} id="contact" className="bg-[#faf8f5] w-full min-h-screen relative overflow-hidden flex items-end pt-32 pb-0 border-t border-[#e8e4dc] font-sans">
-      {/* Huge Background Text */}
-      <motion.div 
-        style={{ y }}
-        className="absolute top-0 left-0 w-full h-full flex flex-col justify-start items-center overflow-hidden pointer-events-none z-0 pt-16 md:pt-12 select-none opacity-10"
-      >
-        <h1 
-          className="text-[25vw] leading-[0.75] font-black text-[#1a1917] uppercase tracking-tighter scale-y-[1.6] origin-top"
-          style={{ fontFamily: "'Impact', 'Arial Black', sans-serif" }}
-        >
-          Contact
-        </h1>
-      </motion.div>
-
-      {/* Form Card Overlay */}
-      <div className="relative z-10 w-full flex justify-end items-end">
-        <div 
-          data-aos="fade-up"
-          className="bg-[#1a1917] border-t border-l border-stone-800 w-full md:w-[85%] lg:w-[75%] p-8 md:p-16 text-white flex flex-col justify-between shadow-2xl backdrop-blur-xl"
-        >
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12 md:mb-16 border-b border-stone-800 pb-6">
-            <div>
-              <div className="text-xs font-bold tracking-[0.2em] uppercase opacity-90 font-mono mb-1 text-amber-400">
-                Reach Shivanjay
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-black tracking-tight text-white">
-                Let's Build Something Great Together
-              </h2>
-            </div>
+    return (
+        <div id="contact" className="relative min-h-screen text-white font-sans flex items-center overflow-hidden [clip-path:inset(0)]">
             
-            <div className="text-xs font-mono font-bold bg-amber-500/10 px-3.5 py-1.5 rounded-full border border-amber-500/20 text-amber-300">
-              Available for Engineering Roles
-            </div>
-          </div>
+            {/* Background Video */}
+            <video 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
+                className="fixed top-0 left-0 w-full h-[100vh] object-cover z-0"
+            >
+                <source src={contactBgVideo} type="video/mp4" />
+            </video>
+            
+            {/* Dark Overlay */}
+            <div className="absolute inset-0 bg-black/70 z-0 pointer-events-none"></div>
 
-          {submitted ? (
-            <div className="bg-stone-900/60 p-12 rounded-3xl border border-stone-800 text-center flex flex-col items-center justify-center my-8">
-              <CheckCircle2 className="w-16 h-16 text-amber-400 mb-4 animate-bounce" />
-              <h3 className="text-2xl font-black text-white mb-2">Message Sent!</h3>
-              <p className="text-sm font-mono text-stone-300">Thank you for reaching out. Shivanjay will get back to you promptly.</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="flex flex-col gap-12 md:gap-16 w-full">
-              <div className="flex flex-col md:flex-row gap-12 md:gap-20 w-full">
+            <div className="w-full max-w-7xl mx-auto px-6 md:px-16 py-12 flex flex-col lg:flex-row gap-20 lg:gap-32 relative z-10">
                 
-                {/* Left Column */}
-                <div className="flex-1 flex flex-col gap-10">
-                  <div className="relative">
-                    <input 
-                      type="text" 
-                      id="firstName" 
-                      required
-                      value={formData.firstName}
-                      onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                      placeholder="First Name" 
-                      className="w-full bg-transparent border-b border-stone-700 pb-3 text-lg focus:outline-none focus:border-amber-500 transition-colors placeholder-stone-500 font-medium rounded-none text-white"
-                    />
-                  </div>
-                  <div className="relative">
-                    <input 
-                      type="text" 
-                      id="lastName" 
-                      required
-                      value={formData.lastName}
-                      onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                      placeholder="Last Name" 
-                      className="w-full bg-transparent border-b border-stone-700 pb-3 text-lg focus:outline-none focus:border-amber-500 transition-colors placeholder-stone-500 font-medium rounded-none text-white"
-                    />
-                  </div>
-                  <div className="relative">
-                    <input 
-                      type="email" 
-                      id="email" 
-                      required
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="Email" 
-                      className="w-full bg-transparent border-b border-stone-700 pb-3 text-lg focus:outline-none focus:border-amber-500 transition-colors placeholder-stone-500 font-medium rounded-none text-white"
-                    />
-                  </div>
+                {/* Left Side: Contact Info */}
+                <div className="w-full lg:w-5/12 flex flex-col justify-start">
+                    <h2 className="text-5xl md:text-6xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-300 to-gray-800 drop-shadow-2xl mb-16">
+                        Get in touch
+                    </h2>
+
+                    <div className="flex flex-col gap-10">
+                        {/* Email */}
+                        <div className="hidden md:block">
+                            <p className="text-gray-400 text-sm mb-2">Email:</p>
+                            <a href="mailto:shivanjayprakashbajpai@gmail.com" className="text-xl tracking-wide hover:text-[#ccff00] transition-colors break-words font-medium">
+                                shivanjayprakashbajpai@gmail.com
+                            </a>
+                        </div>
+
+                        {/* Phone */}
+                        <div className="hidden md:block">
+                            <p className="text-gray-400 text-sm mb-2">Phone:</p>
+                            <a href="tel:+917020637824" className="text-xl tracking-wide hover:text-[#ccff00] transition-colors font-medium">
+                                +91 7020637824
+                            </a>
+                        </div>
+
+                        {/* Follow Us */}
+                        <div className="mt-4 flex flex-col items-center md:items-start">
+                            <p className="text-gray-400 text-sm mb-4">Connect with Shivanjay</p>
+                            <div className="flex items-center justify-center md:justify-start gap-3">
+                                <a href="https://linkedin.com/in/shivanjay-bajpai" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ccff00] hover:text-black transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                                        <rect width="4" height="12" x="2" y="9"/>
+                                        <circle cx="4" cy="4" r="2"/>
+                                    </svg>
+                                </a>
+                                <a href="https://github.com/shivanjayb" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ccff00] hover:text-black transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+                                    </svg>
+                                </a>
+                                <a href="https://instagram.com/shivanjay_bajpai" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-[#ccff00] hover:text-black transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                                        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                {/* Right Column */}
-                <div className="flex-1 flex flex-col">
-                  <div className="relative h-full flex flex-col">
-                    <textarea 
-                      id="message" 
-                      required
-                      value={formData.message}
-                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Type your message here..." 
-                      className="w-full h-full min-h-[140px] bg-transparent border-b border-stone-700 pb-3 text-lg focus:outline-none focus:border-amber-500 transition-colors placeholder-stone-500 font-medium resize-none rounded-none text-white"
-                    ></textarea>
-                  </div>
-                </div>
-              </div>
+                {/* Right Side: Contact Form */}
+                <div className="w-full lg:w-7/12 flex flex-col lg:pt-4">
+                    <form ref={formRef} className="flex flex-col gap-5 w-full" onSubmit={sendEmail}>
+                        
+                        {/* Name and Email Row */}
+                        <div className="flex flex-col md:flex-row gap-4 w-full">
+                            <div className="flex flex-col gap-1.5 w-full md:w-1/2">
+                                <label className="text-xs text-gray-400 font-medium">Your Name</label>
+                                <input 
+                                    type="text" 
+                                    name="name"
+                                    placeholder="Your full name" 
+                                    required
+                                    className="w-full bg-[#111] text-white text-sm rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#ccff00] transition-all placeholder:text-gray-600 border border-transparent"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1.5 w-full md:w-1/2">
+                                <label className="text-xs text-gray-400 font-medium">Email address</label>
+                                <input 
+                                    type="email" 
+                                    name="email"
+                                    placeholder="Your email address" 
+                                    required
+                                    className="w-full bg-[#111] text-white text-sm rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#ccff00] transition-all placeholder:text-gray-600 border border-transparent"
+                                />
+                            </div>
+                        </div>
 
-              {/* Bottom Section */}
-              <div className="flex flex-col md:flex-row gap-12 mt-4">
-                {/* Left text */}
-                <div className="flex-1 flex items-start gap-4 text-sm font-medium text-stone-300">
-                  <input 
-                    type="checkbox" 
-                    id="permission" 
-                    required
-                    checked={formData.permission}
-                    onChange={(e) => setFormData({ ...formData, permission: e.target.checked })}
-                    className="mt-1 w-4 h-4 rounded-sm border-stone-700 bg-transparent text-amber-500 focus:ring-amber-500 cursor-pointer" 
-                    style={{ accentColor: "#d97706" }}
-                  />
-                  <label htmlFor="permission" className="cursor-pointer max-w-[280px] leading-snug">
-                    I give permission to contact me at this email address.
-                  </label>
+                        {/* Phone and Subject Row */}
+                        <div className="flex flex-col md:flex-row gap-4 w-full">
+                            <div className="flex flex-col gap-1.5 w-full md:w-1/2">
+                                <label className="text-xs text-gray-400 font-medium">Phone</label>
+                                <input 
+                                    type="tel" 
+                                    name="phone"
+                                    placeholder="Your phone number" 
+                                    className="w-full bg-[#111] text-white text-sm rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#ccff00] transition-all placeholder:text-gray-600 border border-transparent"
+                                />
+                            </div>
+                            <div className="flex flex-col gap-1.5 w-full md:w-1/2">
+                                <label className="text-xs text-gray-400 font-medium">Subject</label>
+                                <input 
+                                    type="text" 
+                                    name="subject"
+                                    placeholder="Subject" 
+                                    className="w-full bg-[#111] text-white text-sm rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#ccff00] transition-all placeholder:text-gray-600 border border-transparent"
+                                />
+                            </div>
+                        </div>
+
+                        {/* Message */}
+                        <div className="flex flex-col gap-1.5 w-full">
+                            <label className="text-xs text-gray-400 font-medium">Message</label>
+                            <textarea 
+                                name="message"
+                                placeholder="Write something...." 
+                                rows="5"
+                                required
+                                className="w-full bg-[#111] text-white text-sm rounded-lg px-4 py-3 focus:outline-none focus:ring-1 focus:ring-[#ccff00] transition-all placeholder:text-gray-600 border border-transparent resize-none"
+                            ></textarea>
+                        </div>
+
+                        {/* Status Message */}
+                        {statusMessage.text && (
+                            <div className={`text-sm px-4 py-3 rounded-lg border ${statusMessage.type === 'success' ? 'bg-[#ccff00]/10 border-[#ccff00]/50 text-[#ccff00]' : 'bg-red-500/10 border-red-500/50 text-red-400'}`}>
+                                {statusMessage.text}
+                            </div>
+                        )}
+
+                        {/* Submit Button */}
+                        <button 
+                            type="submit" 
+                            disabled={isSubmitting}
+                            className="w-full bg-[#ccff00] text-black text-sm font-bold rounded-lg py-3 hover:bg-[#b3e600] transition-colors mt-2 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+                        >
+                            {isSubmitting ? (
+                                <>
+                                    <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                        <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                    Sending...
+                                </>
+                            ) : (
+                                'Send Message'
+                            )}
+                        </button>
+
+                    </form>
                 </div>
 
-                {/* Right text & button */}
-                <div className="flex-1 flex flex-col gap-8 text-xs text-stone-400 font-medium">
-                  <p className="leading-relaxed max-w-[400px]">
-                    Direct Email: <a href="mailto:shivanjayprakashbajpai@gmail.com" className="underline font-bold text-white hover:text-amber-400 transition-colors">shivanjayprakashbajpai@gmail.com</a> | Phone: <a href="tel:+917020637824" className="underline font-bold text-white hover:text-amber-400 transition-colors">+91 7020637824</a>
-                  </p>
-                  
-                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-6">
-                    <p className="max-w-[250px] leading-relaxed opacity-80">
-                      Based in Nashik, Maharashtra, India. Open to global remote engineering opportunities.
-                    </p>
-                    
-                    <button 
-                      type="submit" 
-                      className="px-8 py-3.5 rounded-full bg-amber-600 text-white font-black flex items-center justify-center gap-3 hover:bg-amber-500 transition-all duration-300 group whitespace-nowrap self-start sm:self-auto shadow-lg"
-                    >
-                      Send
-                      <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </form>
-          )}
-
+            </div>
         </div>
-      </div>
-    </section>
-  );
+    );
 };
 
-export default Contact;
+export default ContactSection;

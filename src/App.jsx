@@ -1,31 +1,36 @@
-import React from 'react';
-import Preloader from './components/Preloader';
-import Navbar from './components/Navbar';
+import React, { useState } from 'react';
 import Hero from './components/Hero';
+import Navbar from './components/Navbar';
 import About from './components/About';
 import Services from './components/Services';
-import Projects from './components/Projects';
-import Gallery from './components/Gallery';
-import Experience from './components/Experience';
-import Contact from './components/Contact';
+import Project from './components/Project';
+import ContactSection from './components/Contact';
 import Footer from './components/Footer';
+import ComingSoon from './components/ComingSoon';
 
 function App() {
+  const [preloaderComplete, setPreloaderComplete] = useState(false);
+  const [showComingSoon, setShowComingSoon] = useState(false);
+
+  if (showComingSoon) {
+    return <ComingSoon onBack={() => setShowComingSoon(false)} />;
+  }
+
   return (
-    <div className="bg-black min-h-screen text-white font-sans selection:bg-[#ff2a2a] selection:text-white">
-      <Preloader />
-      <Navbar />
-      <main>
-        <Hero />
-        <About />
-        <Services />
-        <Projects />
-        <Gallery />
-        <Experience />
-        <Contact />
-      </main>
-      <Footer />
-    </div>
+    <main className="bg-[#050505] text-white min-h-screen">
+      <Hero onPreloadComplete={() => setPreloaderComplete(true)} />
+      
+      {preloaderComplete && (
+        <div className="animate-fade-in-up">
+          <Navbar />
+          <About />
+          <Services />
+          <Project onCtaClick={() => setShowComingSoon(true)} />
+          <ContactSection />
+          <Footer />
+        </div>
+      )}
+    </main>
   );
 }
 

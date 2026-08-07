@@ -1,232 +1,267 @@
-import React, { useRef, useState } from 'react';
-import { motion, useScroll, useSpring, useMotionValueEvent } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-const TagCard = ({ number, title, text, className, aosDelay, aosType, pathLength, containerRef }) => {
-  const ref = useRef(null);
-  const [isActive, setIsActive] = useState(false);
+gsap.registerPlugin(ScrollTrigger);
 
-  useMotionValueEvent(pathLength, "change", (latest) => {
-    if (!ref.current || !containerRef.current) return;
-
-    const cardRect = ref.current.getBoundingClientRect();
-    const containerRect = containerRef.current.getBoundingClientRect();
-
-    const cardTopRelativeToContainer = cardRect.top - containerRect.top;
-    const containerHeight = containerRect.height;
-
-    const triggerY = cardTopRelativeToContainer + 50;
-    const lineTipY = latest * containerHeight;
-
-    if (lineTipY >= triggerY && !isActive) {
-      setIsActive(true);
-    } else if (lineTipY < triggerY && isActive) {
-      setIsActive(false);
-    }
-  });
-
-  return (
-    <div
-      ref={ref}
-      data-aos={aosType || "fade-up"}
-      data-aos-delay={aosDelay}
-      className={`w-72 sm:w-80 rounded-[2rem] p-2 relative flex flex-col items-center hover:scale-[1.02] transition-all duration-700 z-10 ${className} ${
-        isActive
-          ? 'bg-[#1a1917] border-2 border-[#1a1917] text-white shadow-[0_20px_50px_rgba(217,119,6,0.25)]'
-          : 'bg-white border border-[#e8e4dc] shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:border-amber-500/40'
-      }`}
-    >
-      {/* Hole punch */}
-      <div className="w-5 h-5 bg-gradient-to-br from-stone-200 to-stone-400 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)] absolute top-4 border border-stone-300 z-10 flex items-center justify-center">
-        <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-amber-400' : 'bg-stone-500'}`} />
-      </div>
-
-      {/* Inner card container */}
-      <div className={`w-full h-full rounded-[1.5rem] mt-8 p-6 sm:p-8 flex flex-col min-h-[220px] transition-colors duration-700 ${
-        isActive ? 'bg-[#262422] text-white' : 'bg-[#fcfbf9] text-stone-700'
-      }`}>
-        <span className={`text-xl font-bold mb-2 font-mono transition-colors duration-700 ${
-          isActive ? 'text-amber-400' : 'text-stone-400'
-        }`}>{number}</span>
-
-        <h3 className={`text-2xl font-black mb-3 tracking-tight transition-colors duration-700 ${
-          isActive ? 'text-white' : 'text-[#1a1917]'
-        }`}>{title}</h3>
-
-        <p className={`text-sm leading-relaxed font-normal transition-colors duration-700 ${
-          isActive ? 'text-stone-300' : 'text-stone-600'
-        }`}>
-          {text}
-        </p>
-      </div>
-    </div>
-  );
-};
+const servicesData = [
+  {
+    id: '01',
+    title: 'AI FULL STACK DEVELOPMENT',
+    description: 'I build scalable, high-performance web applications by combining modern frontend frameworks, robust backend systems, and AI-powered solutions. From planning and architecture to deployment, I create secure, responsive, and production-ready digital experiences.',
+    capabilities: [
+      'Develop responsive web applications with React.js & Next.js',
+      'Build secure REST APIs using FastAPI, Python & Node.js',
+      'Design scalable backend architecture and PostgreSQL databases',
+      'Integrate AI-powered features, computer vision & LLM pipelines',
+      'Deliver clean, maintainable, production-ready code'
+    ],
+    buttonText: 'VIEW PROJECTS'
+  },
+  {
+    id: '02',
+    title: 'FRONTEND DEVELOPMENT',
+    description: 'I create fast, responsive, and visually engaging user interfaces that provide seamless user experiences across desktop, tablet, and mobile devices.',
+    capabilities: [
+      'React.js',
+      'Next.js',
+      'TypeScript',
+      'Tailwind CSS',
+      'GSAP Animations',
+      'Responsive Design'
+    ]
+  },
+  {
+    id: '03',
+    title: 'BACKEND & API DEVELOPMENT',
+    description: 'I develop secure and scalable backend systems with well-structured APIs, efficient databases, and authentication mechanisms to power modern applications.',
+    capabilities: [
+      'FastAPI',
+      'Python',
+      'Node.js',
+      'Express.js',
+      'PostgreSQL',
+      'JWT Authentication'
+    ]
+  },
+  {
+    id: '04',
+    title: 'AI & COMPUTER VISION',
+    description: 'I integrate artificial intelligence and computer vision model workflows to automate processing, perform pose estimation, and build document chat systems.',
+    capabilities: [
+      'TensorFlow Pose Estimation',
+      'OpenAI & LLM Integration',
+      'RAG Document Parsing',
+      'Prompt Engineering',
+      'Physics Anti-Tamper Algorithms',
+      'Workflow Automation'
+    ]
+  },
+  {
+    id: '05',
+    title: 'TEDx & EVENT LEADERSHIP',
+    description: 'I direct large-scale executive teams, spearhead event licensing, manage sponsorships, and curate keynote speakers for TEDxKKWIEER and institutional tech summits.',
+    capabilities: [
+      'TEDx Licensee & Primary Organizer',
+      'Cross-functional Team Direction (40+ members)',
+      'Sponsorship Acquisition & Budgeting',
+      'Logistics & Stakeholder Operations',
+      'Public Relations & Media Strategy'
+    ]
+  },
+  {
+    id: '06',
+    title: 'DEVOPS & CLOUD TOOLS',
+    description: 'I streamline development workflows with modern tools for version control, containerization, testing, and cloud deployment.',
+    capabilities: [
+      'Git & GitHub',
+      'Docker Containerization',
+      'Postman API Testing',
+      'Google Cloud & BigQuery',
+      'CI/CD Pipelines',
+      'Cloud Deployment'
+    ]
+  }
+];
 
 const Services = () => {
-  const containerRef = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const itemRefs = useRef([]);
+  
+  const titleRef = useRef(null);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start center", "end center"]
-  });
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
-  const pathLength = useSpring(scrollYProgress, { stiffness: 60, damping: 20, restDelta: 0.001 });
+  useEffect(() => {
+    if (titleRef.current) {
+      gsap.fromTo(
+        titleRef.current,
+        { y: -100, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 1.2,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: titleRef.current,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }
+  }, []);
 
   return (
-    <section
-      id="services"
-      ref={containerRef}
-      className="bg-[#faf8f5] pt-28 pb-32 px-6 md:px-12 w-full relative overflow-hidden font-sans bg-[linear-gradient(to_right,#00000006_1px,transparent_1px),linear-gradient(to_bottom,#00000006_1px,transparent_1px)] bg-[size:80px_80px] border-t border-[#e8e4dc]"
-    >
-      <div className="max-w-6xl mx-auto relative">
-
-        {/* Header Content */}
-        <div data-aos="fade-up" className="max-w-3xl mb-16 md:mb-24 relative z-20">
-          <div className="inline-block border border-amber-500/30 rounded-full px-5 py-1.5 text-xs text-amber-900 font-mono font-extrabold uppercase tracking-widest mb-6 shadow-sm bg-amber-500/10">
-            Engineering Methodology
-          </div>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-[#1a1917] leading-[1.1] mb-6 tracking-tight">
-            From algorithmic vision to production code
+    <section id="service" className="md:min-h-screen bg-[#050505] text-white pt-12 pb-12 md:pb-24 px-6 md:px-16 flex flex-col relative overflow-hidden">
+      
+      {/* Top Header Section */}
+      <div className="flex flex-col md:flex-row items-end md:items-start justify-end w-full mt-0 z-0 pb-12">
+        {/* Giant Title */}
+        <div className="flex flex-col md:flex-row items-start justify-end gap-2 md:gap-4 lg:gap-8 pr-2 md:pr-0 text-right">
+          <h2 ref={titleRef} className="text-3xl sm:text-4xl md:text-7xl lg:text-8xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-300 to-gray-800 drop-shadow-2xl leading-[1.1] md:leading-[0.9] text-right">
+            WHAT I<br/>CAN DO
           </h2>
-          <p className="text-stone-600 text-base md:text-lg max-w-xl font-medium leading-relaxed">
-            We follow a structured, creative, and highly technical approach to turn complex engineering problems into robust full-stack applications.
-          </p>
         </div>
-
-        {/* Path & Cards Area */}
-        <div className="relative md:h-[1350px]">
-
-          {/* Desktop SVG Animated Dashed Line */}
-          <svg
-            className="hidden md:block absolute top-0 left-0 w-full h-[1350px] pointer-events-none z-0"
-            viewBox="0 0 1000 1350"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M 650,50 C 400,150 200,250 300,450 C 400,650 750,600 700,800 C 650,1000 400,1000 300,1150"
-              fill="none"
-              stroke="#e2d9cc"
-              strokeWidth="2"
-              strokeDasharray="8 10"
-            />
-
-            <mask id="path-mask">
-              <motion.path
-                d="M 650,50 C 400,150 200,250 300,450 C 400,650 750,600 700,800 C 650,1000 400,1000 300,1150"
-                fill="none"
-                stroke="white"
-                strokeWidth="20"
-                style={{ pathLength }}
-              />
-            </mask>
-
-            <path
-              d="M 650,50 C 400,150 200,250 300,450 C 400,650 750,600 700,800 C 650,1000 400,1000 300,1150"
-              fill="none"
-              stroke="#d97706"
-              strokeWidth="3"
-              strokeDasharray="8 10"
-              mask="url(#path-mask)"
-              className="drop-shadow-sm"
-            />
-          </svg>
-
-          {/* Mobile Animated Line */}
-          <svg
-            className="md:hidden absolute top-0 left-[50%] -translate-x-1/2 w-4 h-[100%] pointer-events-none z-0"
-            viewBox="0 0 4 100"
-            preserveAspectRatio="none"
-          >
-            <path
-              d="M 2,0 L 2,100"
-              fill="none"
-              stroke="#e2d9cc"
-              strokeWidth="4"
-              strokeDasharray="4 6"
-              vectorEffect="non-scaling-stroke"
-            />
-            <mask id="path-mask-mobile">
-              <motion.path
-                d="M 2,0 L 2,100"
-                fill="none"
-                stroke="white"
-                strokeWidth="4"
-                style={{ pathLength }}
-                vectorEffect="non-scaling-stroke"
-              />
-            </mask>
-            <path
-              d="M 2,0 L 2,100"
-              fill="none"
-              stroke="#d97706"
-              strokeWidth="4"
-              strokeDasharray="4 6"
-              mask="url(#path-mask-mobile)"
-              vectorEffect="non-scaling-stroke"
-            />
-          </svg>
-
-          {/* Tag Cards Container */}
-          <div className="flex flex-col gap-8 md:gap-12 items-center md:block relative z-10 w-full pt-4 md:pt-0 pb-12 md:pb-0">
-
-            <TagCard
-              number="01"
-              title="Define & Research"
-              text="Gathering technical specs, studying domain research papers, and designing patent-safe licensing architectures."
-              className="md:absolute md:top-[0px] md:right-[5%] lg:right-[10%] rotate-2 md:rotate-6"
-              aosType="fade-left"
-              aosDelay="100"
-              pathLength={pathLength}
-              containerRef={containerRef}
-            />
-
-            <TagCard
-              number="02"
-              title="Architect AI & DB"
-              text="Modeling PostgreSQL/MongoDB schemas, designing TensorFlow pose estimation or RAG/LLM document parsing pipelines."
-              className="md:absolute md:top-[320px] md:left-[5%] lg:left-[10%] -rotate-2 md:-rotate-6"
-              aosType="fade-right"
-              aosDelay="200"
-              pathLength={pathLength}
-              containerRef={containerRef}
-            />
-
-            <TagCard
-              number="03"
-              title="Build & Integrate"
-              text="Engineering full-stack React/Next.js frontends connected to high-speed FastAPI, Flask, or Node.js backend services."
-              className="md:absolute md:top-[640px] md:right-[5%] lg:right-[15%] rotate-1 md:rotate-3"
-              aosType="fade-left"
-              aosDelay="300"
-              pathLength={pathLength}
-              containerRef={containerRef}
-            />
-
-            <TagCard
-              number="04"
-              title="Test & Deploy"
-              text="Docker containerization, unit & regression testing, AWS cloud optimization, and continuous delivery deployment."
-              className="md:absolute md:top-[960px] md:left-[15%] lg:left-[25%] -rotate-1 md:-rotate-3"
-              aosType="fade-right"
-              aosDelay="400"
-              pathLength={pathLength}
-              containerRef={containerRef}
-            />
-
-            {/* Hand-drawn end text */}
-            <div
-              data-aos="fade-in"
-              data-aos-delay="600"
-              className="hidden md:block absolute top-[1200px] left-[55%] font-caveat text-3xl font-bold text-amber-700 rotate-6"
-            >
-              Ready to be delivered! 🚀
-            </div>
-
-          </div>
-
-        </div>
-
       </div>
+
+      {/* Accordion List */}
+      <div className="z-10 relative mt-0 -mx-6 md:-mx-16 border-t border-white/20">
+        {servicesData.map((service, index) => {
+          const isHighlighted = activeIndex === index || (!isMobile && hoveredIndex === index);
+          
+          return (
+          <div 
+            key={service.id} 
+            ref={(el) => itemRefs.current[index] = el}
+            data-index={index}
+            className={`border-b border-white/20 py-5 md:py-7 px-6 md:px-16 cursor-pointer transition-all duration-300 ease-in-out ${
+              isHighlighted ? 'bg-[#ccff00]' : ''
+            }`}
+            onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+            onMouseEnter={() => setHoveredIndex(index)}
+            onMouseLeave={() => setHoveredIndex(null)}
+          >
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-start">
+              
+              {/* Left Side: Number, Title & Capabilities */}
+              <div className="flex items-start justify-between w-full lg:w-1/2 gap-2">
+                <div className="flex items-start gap-3 md:gap-16 w-full min-w-0">
+                  <div className="h-7 flex items-center md:h-10 flex-shrink-0">
+                    <span className={`text-lg md:text-3xl font-medium transition-colors duration-300 ease-in-out leading-none ${
+                      isHighlighted ? 'text-black' : 'text-white'
+                    }`}>
+                      {service.id}
+                    </span>
+                  </div>
+                  <div className="flex flex-col w-full min-w-0">
+                    <div className="h-7 flex items-center md:h-10">
+                      <h3 className={`text-[11px] sm:text-sm md:text-xl lg:text-2xl font-black uppercase tracking-wide leading-none transition-colors duration-300 ease-in-out whitespace-nowrap overflow-hidden text-ellipsis ${
+                        isHighlighted ? 'text-black' : 'text-white'
+                      }`}>
+                        {service.title}
+                      </h3>
+                    </div>
+                    
+                    {/* Expanded Capabilities */}
+                    <div 
+                      className={`overflow-hidden transition-all duration-500 ease-in-out w-full ${
+                        activeIndex === index ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
+                      }`}
+                    >
+                      <div className="pt-6 lg:pt-8 flex flex-col gap-3">
+                        <ul className={`transition-colors duration-300 ease-in-out text-sm md:text-base font-light space-y-2 flex flex-col ${
+                          isHighlighted ? 'text-black/80' : 'text-gray-300'
+                        }`}>
+                          {service.capabilities.map((cap, i) => (
+                            <li key={i} className="flex items-start gap-3">
+                              <span className={`transition-colors duration-300 ease-in-out mt-1.5 opacity-70 text-[10px] ${
+                                isHighlighted ? 'text-black' : 'text-[#ccff00]'
+                              }`}>■</span>
+                              <span>{cap}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Mobile Arrow Icon */}
+                <div className="h-7 flex items-center flex-shrink-0 lg:hidden">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className={`w-6 h-6 transition-all duration-300 ${
+                      isHighlighted ? 'text-black' : 'text-[#ccff00]'
+                    } ${activeIndex === index ? '-rotate-45' : 'rotate-45'}`} 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor" 
+                    strokeWidth={1.5}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </div>
+              </div>
+
+              {/* Right Side: Description, Button & Desktop Arrow */}
+              <div className="flex flex-row gap-6 w-full lg:w-1/2 justify-between lg:justify-end relative items-start">
+                
+                {/* Expanded Description */}
+                <div 
+                  className={`overflow-hidden transition-all duration-500 ease-in-out flex flex-col items-start w-full ${
+                    activeIndex === index ? 'max-h-[800px] opacity-100' : 'max-h-0 opacity-0'
+                  }`}
+                >
+                   <div className="pt-4 md:pt-6 lg:pt-[72px] flex flex-col gap-6 w-full pr-0 lg:pr-12">
+                     <p className={`transition-colors duration-300 ease-in-out text-base md:text-lg leading-relaxed max-w-lg font-light ${
+                       isHighlighted ? 'text-black/80' : 'text-gray-300'
+                     }`}>
+                       {service.description}
+                     </p>
+                     {service.buttonText && (
+                       <a href="#project" className={`font-bold uppercase tracking-wider text-xs md:text-sm px-6 py-3 border transition-colors duration-300 ease-in-out inline-flex items-center gap-2 mt-4 ${
+                         isHighlighted ? 'bg-black text-[#ccff00] border-black' : 'bg-[#ccff00] text-black border-[#ccff00]'
+                       }`}>
+                         <span className="w-2 h-2 border-t border-l border-current"></span>
+                         {service.buttonText}
+                         <span className="w-2 h-2 border-b border-r border-current"></span>
+                       </a>
+                     )}
+                   </div>
+                </div>
+
+                {/* Desktop Arrow Icon */}
+                <div className="hidden lg:flex flex-shrink-0 h-10 items-center">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className={`w-10 h-10 transition-all duration-300 ${
+                      isHighlighted ? 'text-black' : 'text-[#ccff00]'
+                    } ${activeIndex === index ? '-rotate-45' : 'rotate-45'}`} 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor" 
+                    strokeWidth={1.5}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+          );
+        })}
+      </div>
+      
     </section>
   );
 };

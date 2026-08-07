@@ -1,62 +1,72 @@
 import React from 'react';
+import footerBg from '../assets/Footer/Footer.png';
 
 const Footer = () => {
   return (
-    <footer className="bg-[#f4efe6] text-stone-600 py-16 px-6 md:px-12 w-full font-mono text-[10px] md:text-xs tracking-widest flex flex-col justify-between min-h-[50vh] border-t border-[#e8e4dc]">
-      
-      {/* Top Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 w-full font-medium">
-        <div className="flex flex-col gap-1">
-          <p className="text-[#1a1917] font-bold mb-1">Engineering Specialties</p>
-          <p className="text-stone-600">AI & Computer Vision Systems</p>
-          <p className="text-stone-600">LLM & RAG Document Intelligence</p>
-          <p className="text-stone-600">Full-Stack React & FastAPI Architectures</p>
-        </div>
-        
-        <div className="flex flex-col gap-1 md:items-center">
-          <p className="text-[#1a1917] font-bold mb-1">Academic & Leadership</p>
-          <p className="text-stone-600">B.Tech CS & Design (K.K. Wagh)</p>
-          <p className="text-amber-800 font-bold">2x TEDx Licensee & Organizer</p>
-          <a href="#projects" className="underline hover:text-amber-700 transition-colors mt-1 underline-offset-4 decoration-1 font-bold">
-            View Projects
-          </a>
-        </div>
-        
-        <div className="flex flex-col gap-1 md:items-end">
-          <p className="text-[#1a1917] font-bold mb-1">Availability</p>
-          <p className="text-stone-600">Nashik, India (Open to Remote)</p>
-          <p className="text-[#1a1917] font-bold">{new Date().getFullYear()}</p>
-        </div>
+    <footer className="relative bg-black text-white py-12 px-6 md:px-16 h-screen flex flex-col justify-between overflow-hidden">
+      {/* Background Image */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Scale and translate the image to crop the top */}
+        <div 
+          className="absolute inset-0 bg-cover bg-bottom w-full h-full scale-[1.3] md:scale-[1.5] origin-bottom translate-y-[10%]"
+          style={{ backgroundImage: `url(${footerBg})` }}
+        />
+        {/* Dark overlay at the top to blend the background smoothly */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/50 to-transparent"></div>
       </div>
 
-      {/* Middle Huge Lowercase Text */}
-      <div className="w-full flex justify-center items-center py-20 md:py-24 overflow-hidden">
-        <h2 className="text-[18vw] md:text-[16vw] leading-none font-sans font-black tracking-tighter lowercase select-none text-[#1a1917] w-full text-center hover:text-amber-700 transition-colors duration-700">
-          shivanjay
-        </h2>
-      </div>
+      <div className="relative z-10 flex flex-col h-full justify-between">
 
-      {/* Bottom Row */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 w-full items-end font-medium border-t border-[#e8e4dc] pt-8">
-        <div className="flex flex-col gap-4">
-          <a href="#contact" className="underline hover:text-amber-700 transition-colors underline-offset-4 decoration-1 font-bold text-sm text-[#1a1917]">
-            Contact
-          </a>
-          <p className="text-stone-500 font-mono text-[9px] md:text-[10px]">
-            &copy; {new Date().getFullYear()} Shivanjay P. Bajpai | Built with React & Vite
-          </p>
+        {/* Top Section */}
+        <div className="flex flex-col md:flex-row justify-between items-start mb-8 gap-10">
+          <div className="flex flex-col gap-6 w-full md:w-auto">
+            <div>
+              <p className="text-gray-400 text-sm mb-2">Connect with me</p>
+              <a href="mailto:shivanjayprakashbajpai@gmail.com" className="text-xl md:text-4xl lg:text-5xl font-medium hover:text-[#ccff00] transition-colors break-words">
+                shivanjayprakashbajpai@gmail.com
+              </a>
+            </div>
+
+            <div className="flex flex-wrap gap-6 text-sm text-gray-300 mt-4">
+              <a href="#home" className="hover:text-[#ccff00] transition-colors">Home</a>
+              <a href="#about" className="hover:text-[#ccff00] transition-colors">About</a>
+              <a href="#service" className="hover:text-[#ccff00] transition-colors">Services</a>
+              <a href="#project" className="hover:text-[#ccff00] transition-colors">Projects</a>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-start md:items-end text-left md:text-right w-full md:w-auto mt-4 md:mt-0">
+            <h3 className="text-lg md:text-2xl font-medium mb-2">Let's build something</h3>
+            <p className="text-gray-400 text-sm mb-6 max-w-xs">
+              Open for full-time engineering roles, AI research, & collaborations.
+            </p>
+            <a href="#contact" className="bg-[#ccff00] text-black px-6 py-3 rounded-full text-sm font-bold hover:bg-[#b3e600] transition-colors">
+              Get in touch
+            </a>
+          </div>
         </div>
-        
-        <div className="flex flex-col gap-1 md:items-center">
-          <a href="mailto:shivanjayprakashbajpai@gmail.com" className="underline hover:text-amber-700 transition-colors underline-offset-4 decoration-1 lowercase text-stone-700">
-            shivanjayprakashbajpai@gmail.com
-          </a>
+
+        {/* Middle Section - Socials */}
+        <div className="flex flex-wrap justify-between items-center py-6 border-t border-white/10 mb-4 text-sm md:text-lg font-medium">
+          <a href="https://linkedin.com/in/shivanjay-bajpai" target="_blank" rel="noopener noreferrer" className="hover:text-[#ccff00] transition-colors">LinkedIn</a>
+          <a href="https://github.com/shivanjayb" target="_blank" rel="noopener noreferrer" className="hover:text-[#ccff00] transition-colors">Github</a>
+          <a href="https://instagram.com/shivanjay_bajpai" target="_blank" rel="noopener noreferrer" className="hover:text-[#ccff00] transition-colors">Instagram</a>
+          <a href="mailto:shivanjayprakashbajpai@gmail.com" className="hover:text-[#ccff00] transition-colors">Email</a>
         </div>
-        
-        <div className="flex flex-col gap-1 md:items-end">
-          <a href="#home" className="underline text-stone-600 hover:text-amber-700 transition-colors underline-offset-4 decoration-1">
-            Back to top ↑
-          </a>
+
+        {/* Huge Text Section */}
+        <div className="w-full text-center flex-1 flex items-center justify-center min-h-0">
+          <h1 className="text-[12vw] font-bold leading-none tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-200 to-gray-700" style={{ fontFamily: 'Inter, sans-serif' }}>
+            SHIVANJAY
+          </h1>
+        </div>
+
+        {/* Bottom Section */}
+        <div className="flex flex-col md:flex-row justify-between items-center text-xs text-gray-400 mt-auto pt-6">
+          <p>© {new Date().getFullYear()} Shivanjay P. Bajpai. All Rights Reserved.</p>
+          <div className="flex gap-6 mt-4 md:mt-0">
+            <a href="#home" className="hover:text-white transition-colors">Back to top ↑</a>
+          </div>
         </div>
       </div>
     </footer>

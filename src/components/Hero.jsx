@@ -1,132 +1,156 @@
-import React, { useState, useEffect } from 'react';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { Play, Pause, ArrowDown, Code, Sparkles } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import centerImage from '../assets/hero_assets/hero_center.png';
 
-const Hero = () => {
-  const [isPlaying, setIsPlaying] = useState(true);
+const Hero = ({ onPreloadComplete }) => {
+  const [text, setText] = useState('SHIVANJAY');
+  const containerRef = useRef(null);
+  const textRef = useRef(null);
+  const subtitleRef = useRef(null);
+  const buttonsRef = useRef(null);
+  const imageRef = useRef(null);
 
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: 'ease-out'
+    // Lock scroll during animation
+    window.scrollTo(0, 0);
+    document.body.style.overflow = 'hidden';
+
+    const target = "PORTFOLIO";
+    const start = "SHIVANJAY";
+    let iterations = 0;
+    let intervalId;
+    let timeoutId;
+
+    const imageLoadPromise = new Promise((resolve) => {
+      const img = new window.Image();
+      img.src = centerImage;
+      if (img.complete) {
+        resolve();
+      } else {
+        img.onload = resolve;
+        img.onerror = resolve;
+      }
     });
+
+    const delayPromise = new Promise((resolve) => {
+      timeoutId = setTimeout(resolve, 1000);
+    });
+
+    let isMounted = true;
+
+    Promise.all([imageLoadPromise, delayPromise]).then(() => {
+      if (!isMounted) return;
+
+      intervalId = setInterval(() => {
+        setText(() => {
+          let newText = target.split("").map((letter, index) => {
+            if (index < Math.floor(iterations)) {
+              return target[index]; // Target letter
+            }
+            if (index < start.length) {
+              return start[index]; // Original letter
+            }
+            return "";
+          }).join("");
+          return newText;
+        });
+
+        if (iterations >= target.length) {
+          clearInterval(intervalId);
+
+          // GSAP Animation Sequence
+          const tl = gsap.timeline({
+            onComplete: () => {
+              document.body.style.overflow = 'auto'; // Unlock scroll
+              if (onPreloadComplete) onPreloadComplete(); // Unlock rest of the website
+            }
+          });
+
+          // 1. Move the central text container up from 50% to its resting place
+          const isMobile = window.innerWidth < 768;
+          tl.to(containerRef.current, {
+            top: isMobile ? "20%" : "45%",
+            duration: 1.5,
+            ease: "power3.inOut"
+          }, "+=0.2"); // slight delay after scramble finishes
+
+          // 2. Fade and slide up the Subtitle and Buttons
+          tl.fromTo([subtitleRef.current, buttonsRef.current],
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 1.2, stagger: 0.2, ease: "power3.out" },
+            "-=1.0" // start animating these while the text is still moving up
+          );
+
+          // 3. Slide the image upward to the center (no fading)
+          tl.fromTo(imageRef.current,
+            { y: "100vh" }, // start entirely offscreen at the bottom
+            { y: 0, duration: 1.5, ease: "power3.out" },
+            "-=1.2" // start sliding up around the same time
+          );
+        }
+        iterations += 1 / 3; // Controls the speed of the letter swap
+      }, 50); // 50ms per step
+    });
+
+    return () => {
+      isMounted = false;
+      document.body.style.overflow = 'auto';
+      clearTimeout(timeoutId);
+      clearInterval(intervalId);
+    };
   }, []);
 
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying);
-  };
-
   return (
-    <section id="home" className="relative w-full h-screen overflow-hidden bg-[#faf8f5] font-sans">
-      
-      {/* Background Hero Canvas Photo with Soft Light Overlay */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-gradient-to-t from-[#faf8f5] via-[#faf8f5]/70 to-[#faf8f5]/85 z-10" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(217,119,6,0.12)_0,transparent_70%)] z-10" />
-        <img
-          src="/assets/photos/tedx_leader1.jpg"
-          alt="Shivanjay P. Bajpai Leadership"
-          className={`w-full h-full object-cover scale-105 transition-all duration-1000 ${
-            isPlaying ? 'grayscale contrast-110 brightness-105 hover:grayscale-0' : 'grayscale-0 contrast-105'
-          }`}
-        />
-      </div>
+    <section
+      id="home"
+      className="relative min-h-screen flex items-end justify-center bg-cover bg-center bg-no-repeat overflow-hidden"
+      style={{ background: 'radial-gradient(circle, #222222 0%, #000000 80%)' }}
+    >
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
 
-      {/* Content Container */}
-      <div className="relative z-20 px-6 pb-20 md:pb-[8%] md:px-12 max-w-7xl mx-auto flex flex-col md:flex-row justify-end md:justify-between items-start md:items-end text-left w-full h-full">
-        
-        {/* Left Side: Text and Buttons */}
-        <div className="flex flex-col items-start text-left max-w-2xl w-full">
-          
-          {/* Status Badge */}
-          <div 
-            data-aos="fade-down"
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono font-bold tracking-wider text-amber-900 uppercase backdrop-blur-md mb-6 shadow-sm"
-          >
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-600 animate-ping" />
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-600 absolute" />
-            <span className="ml-2 font-bold text-amber-900">Shivanjay P. Bajpai</span>
-            <span className="text-stone-400">|</span>
-            <span className="text-stone-700">2x TEDx Licensee & AI Engineer</span>
-          </div>
-
-          {/* Main Heading with Warm Stroke */}
-          <h1 
-            data-aos="fade-up"
-            className="text-[#1a1917] text-3xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight leading-[1.1]"
-          >
-            Hi, I’m a <br />
-            <span className="text-transparent [-webkit-text-stroke:1.5px_#1a1917] md:[-webkit-text-stroke:2px_#1a1917]">
-              Full Stack & AI Engineer
-            </span>
-          </h1>
-
-          {/* Subheading */}
-          <p 
-            data-aos="fade-up"
-            data-aos-delay="200"
-            className="text-stone-600 text-sm md:text-lg font-medium mb-8 max-w-md leading-relaxed"
-          >
-            I build fast, scalable AI systems, computer vision platforms, and modern web applications using React, Python, FastAPI, and PostgreSQL.
-          </p>
-
-          {/* Buttons */}
-          <div 
-            data-aos="fade-up"
-            data-aos-delay="400"
-            className="flex flex-row flex-wrap items-center gap-3 w-full"
-          >
-            <a
-              href="#projects"
-              className="px-6 py-3.5 rounded-full bg-[#1a1917] text-white font-extrabold text-xs md:text-sm hover:bg-amber-600 transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2"
-            >
-              <Code className="w-4 h-4" />
-              <span>Explore My Work</span>
-            </a>
-            
-            <a
-              href="#contact"
-              className="px-6 py-3.5 rounded-full bg-white border border-[#e8e4dc] text-stone-800 font-extrabold text-xs md:text-sm hover:bg-stone-100 transition-all duration-300 shadow-sm backdrop-blur-md flex items-center gap-2"
-            >
-              <Sparkles className="w-4 h-4 text-amber-600" />
-              <span>Contact Me</span>
-            </a>
-          </div>
-        </div>
-
-        {/* Right Side: Play/Pause Button */}
-        <div 
-          data-aos="zoom-in"
-          data-aos-delay="600"
-          className="mt-8 md:mt-0 flex flex-row md:flex-col items-center gap-2 md:gap-3 cursor-pointer group self-start md:self-auto"
-          onClick={togglePlay}
-        >
-          <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-[#e8e4dc] bg-white backdrop-blur-md flex justify-center items-center group-hover:scale-110 group-hover:bg-amber-600 group-hover:border-amber-600 group-hover:text-white transition-all duration-500 shadow-md">
-            {isPlaying ? (
-              <Pause className="w-5 h-5 md:w-8 md:h-8 text-stone-800 group-hover:text-white" />
-            ) : (
-              <Play className="w-5 h-5 md:w-8 md:h-8 text-stone-800 group-hover:text-white ml-0.5 md:ml-1" />
-            )}
-          </div>
-          <span className="text-stone-700 text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-80 group-hover:opacity-100 transition-opacity font-mono">
-            {isPlaying ? "Monochrome" : "Color Reel"}
-          </span>
-        </div>
-      </div>
-
-      {/* Scroll Indicator */}
-      <div 
-        data-aos="fade-up"
-        data-aos-delay="800"
-        className="hidden md:block absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
+      <div
+        ref={containerRef}
+        className="absolute top-[50%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-0 pointer-events-none select-none flex flex-col items-start w-max"
       >
-        <a href="#about" className="flex flex-col items-center gap-1 text-stone-400 hover:text-stone-900 transition-colors">
-          <div className="animate-bounce p-1 rounded-full border border-[#e8e4dc] bg-white shadow-sm">
-            <ArrowDown className="w-4 h-4 text-amber-600" />
-          </div>
-        </a>
+        <h1
+          ref={textRef}
+          className="text-[16vw] md:text-[10rem] lg:text-[14rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-300 to-gray-800 drop-shadow-2xl pr-4 md:pr-8 leading-none uppercase"
+        >
+          {text}
+        </h1>
+
+        <p
+          ref={subtitleRef}
+          className="absolute -bottom-8 left-1/2 -translate-x-1/2 md:translate-x-0 md:-bottom-12 md:left-8 text-white text-base md:text-2xl lg:text-4xl drop-shadow-md z-10 opacity-0 w-max"
+        >
+          <span className="font-bold">AI & Full-Stack</span> <span className="font-light italic text-gray-300">Developer</span>
+        </p>
+
+        <div
+          ref={buttonsRef}
+          className="absolute -bottom-20 left-1/2 -translate-x-1/2 md:translate-x-0 md:-bottom-12 md:left-auto md:right-20 flex items-center gap-2 md:gap-4 pointer-events-auto z-10 opacity-0 w-max"
+        >
+          <a href="#contact" className="group w-8 h-8 md:w-12 md:h-12 rounded-full border border-gray-400/30 flex items-center justify-center backdrop-blur-md bg-black/20 hover:bg-[#ccff00] hover:text-black hover:border-[#ccff00] transition-all duration-300 cursor-pointer">
+            <svg className="w-3 h-3 md:w-4 md:h-4 text-gray-300 group-hover:text-black transition-transform duration-300 group-hover:rotate-45" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 7L7 17M7 17H16M7 17V8" />
+            </svg>
+          </a>
+
+          <a href="#contact" className="px-4 py-1.5 md:px-6 md:py-2.5 rounded-full border border-[#ccff00] flex items-center justify-center backdrop-blur-md bg-[#ccff00] text-black hover:bg-[#b3e600] transition-all cursor-pointer">
+            <span className="text-black text-xs md:text-base font-bold tracking-wider uppercase">Contact</span>
+          </a>
+        </div>
+      </div>
+
+      <div
+        ref={imageRef}
+        className="relative z-10 text-center text-white flex flex-col items-center w-full pointer-events-none translate-y-[100vh]"
+      >
+        <img
+          src={centerImage}
+          alt="Hero Center Graphic"
+          className="w-full max-w-md object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+        />
       </div>
     </section>
   );

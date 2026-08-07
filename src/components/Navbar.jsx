@@ -1,117 +1,104 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [show, setShow] = useState(false);
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  // Trigger initial slide down animation
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const timer = setTimeout(() => setShow(true), 100);
+    return () => clearTimeout(timer);
   }, []);
 
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Methodology', href: '#services' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Moments', href: '#gallery' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Contact', href: '#contact' },
-  ];
+  useEffect(() => {
+    const controlNavbar = () => {
+      if (typeof window !== 'undefined') {
+        if (window.scrollY > lastScrollY && window.scrollY > 50) {
+          setShow(false);
+        } else {
+          setShow(true);
+        }
+        setLastScrollY(window.scrollY);
+      }
+    };
+
+    window.addEventListener('scroll', controlNavbar);
+
+    // cleanup function
+    return () => {
+      window.removeEventListener('scroll', controlNavbar);
+    };
+  }, [lastScrollY]);
+
+  // Prevent scrolling when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+    return () => {
+      document.body.style.overflow = 'auto';
+    };
+  }, [isMenuOpen]);
+
+  const navLinks = ['Home', 'About', 'Service', 'Project', 'Contact'];
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isOpen 
-          ? 'bg-[#faf8f5] py-4 border-b border-[#e8e4dc] shadow-md'
-          : isScrolled 
-            ? 'bg-[#faf8f5]/90 backdrop-blur-md py-4 border-b border-[#e8e4dc] shadow-sm' 
-            : 'bg-transparent py-6'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 flex justify-between items-center">
-        
-        {/* Left Side: Logo/Name */}
-        <div className="flex items-center">
-          <a href="#home" className="text-[#1a1917] text-2xl font-black tracking-tight flex items-center gap-1 group">
-            Shivanjay<span className="text-amber-600 group-hover:scale-150 transition-transform duration-300">.</span>
-          </a>
+    <>
+      <nav className={`fixed top-0 left-0 w-full z-50 flex items-center justify-between px-6 py-5 md:px-12 md:py-6 transition-all duration-700 ease-in-out ${show ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'} ${isMenuOpen ? 'bg-black/90 backdrop-blur-md' : 'bg-transparent'}`}>
+        {/* Logo */}
+        <div className="text-white font-black text-xl md:text-2xl tracking-widest uppercase cursor-pointer relative z-50">
+          Shivanjay<span className="text-[#ccff00]">.</span>
         </div>
 
-        {/* Center: Desktop Menu Links */}
-        <div className="hidden md:flex space-x-7 items-center bg-white border border-[#e8e4dc] px-6 py-2 rounded-full shadow-sm backdrop-blur-md">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href}
-              className="text-stone-600 hover:text-[#1a1917] text-xs lg:text-sm font-semibold relative group transition-colors duration-300"
+        {/* Navigation Links (Desktop) */}
+        <div className="hidden md:flex items-center gap-8">
+          {navLinks.map((item) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className="text-gray-300 text-sm hover:text-[#ccff00] transition-colors uppercase tracking-wider font-medium"
             >
-              {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-amber-600 transition-all duration-300 group-hover:w-full" />
+              {item}
             </a>
           ))}
         </div>
 
-        {/* Right Side: CTA Button */}
-        <div className="hidden md:block">
-          <a 
-            href="#contact" 
-            className="px-6 py-2.5 rounded-full bg-[#1a1917] text-white font-extrabold text-xs lg:text-sm hover:bg-amber-600 transition-all duration-300 flex items-center gap-1.5 shadow-md hover:shadow-lg"
-          >
-            <span>Get In Touch</span>
-            <ArrowUpRight className="w-4 h-4" />
-          </a>
+        {/* Mobile Menu Icon */}
+        <div
+          className="md:hidden text-white cursor-pointer hover:text-[#ccff00] transition-colors relative z-50 p-2"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+        >
+          {isMenuOpen ? (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          )}
         </div>
+      </nav>
 
-        {/* Mobile Hamburger Menu Icon */}
-        <div className="md:hidden flex items-center">
-          <button 
-            onClick={() => setIsOpen(!isOpen)}
-            className="text-[#1a1917] focus:outline-none p-2 rounded-lg bg-white border border-[#e8e4dc]"
-            aria-label="Toggle Menu"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Slide-Down Menu */}
-      <div 
-        className={`md:hidden absolute top-full left-0 w-full transition-all duration-300 overflow-hidden ${
-          isOpen ? 'max-h-[550px] py-6 opacity-100 bg-[#faf8f5] border-b border-[#e8e4dc] shadow-2xl' : 'max-h-0 opacity-0 bg-transparent'
-        }`}
-      >
-        <div className="flex flex-col px-6 space-y-4">
-          {navLinks.map((link) => (
-            <a 
-              key={link.name} 
-              href={link.href}
-              onClick={() => setIsOpen(false)}
-              className="text-[#1a1917] hover:text-amber-600 font-extrabold text-xl border-b border-[#e8e4dc] pb-2.5 transition-colors"
+      {/* Mobile Menu Overlay */}
+      <div className={`fixed inset-0 z-40 bg-[#0a0a0a] flex flex-col items-center justify-center transition-all duration-500 ease-in-out md:hidden ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+        <div className="flex flex-col items-center gap-8">
+          {navLinks.map((item, index) => (
+            <a
+              key={item}
+              href={`#${item.toLowerCase()}`}
+              className={`text-white text-3xl font-black uppercase tracking-widest hover:text-[#ccff00] transition-all duration-500 delay-${index * 100} ${isMenuOpen ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'}`}
+              onClick={() => setIsMenuOpen(false)}
             >
-              {link.name}
+              {item}
             </a>
           ))}
-          <div className="pt-2">
-             <a 
-               href="#contact" 
-               onClick={() => setIsOpen(false)} 
-               className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-full bg-[#1a1917] text-white font-black hover:bg-amber-600 transition-colors w-full text-center shadow-lg"
-             >
-               Get In Touch <ArrowUpRight className="w-4 h-4" />
-             </a>
-          </div>
         </div>
       </div>
-    </nav>
+    </>
   );
 };
 
