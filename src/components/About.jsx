@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import aboutImage from '../assets/about_section/about_section.png';
+import aboutImage from '../assets/about_section/222.jpg';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -80,30 +80,54 @@ const About = () => {
       <div className="max-w-7xl mx-auto w-full z-10">
 
         {/* Mobile Intro Text */}
-        <h2 ref={introMobileRef} className="lg:hidden text-center text-[18vw] md:text-[8rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-300 to-gray-800 drop-shadow-2xl leading-none mb-10 md:mb-16">
+        <h2 ref={introMobileRef} className="lg:hidden text-center text-[18vw] md:text-[8rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-300 to-gray-800 drop-shadow-2xl leading-none mb-8 md:mb-12">
           Intro
         </h2>
 
         {/* Content Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16 lg:gap-24 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center">
 
-          {/* Left Column - Image */}
-          <div className="flex justify-center lg:justify-start pl-0 lg:pl-20">
-            <img
-              src={aboutImage}
-              alt="Shivanjay P. Bajpai"
-              className="w-48 md:w-56 lg:w-64 object-contain drop-shadow-2xl"
-            />
+          {/* Left Column - Shivanjay's Full Vivid Color Photo 222 */}
+          <div className="flex justify-center lg:justify-start pl-0 lg:pl-10">
+            <div className="group relative bg-[#111] p-3 md:p-3.5 rounded-3xl border border-white/15 shadow-[0_20px_50px_rgba(0,0,0,0.8)] hover:border-[#ccff00]/50 transition-all duration-500 transform hover:-rotate-1 hover:scale-[1.02]">
+              
+              {/* Image Container in Vivid Full Color */}
+              <div className="relative w-64 sm:w-72 md:w-80 lg:w-84 aspect-[3/4] overflow-hidden rounded-2xl bg-black border border-white/10">
+                <img
+                  src={aboutImage}
+                  alt="Shivanjay P. Bajpai"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-out"
+                />
+                
+                {/* Subtle Bottom Vignette */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-60 group-hover:opacity-30 transition-opacity duration-500" />
+                
+                {/* Top Badge Overlay */}
+                <div className="absolute top-3 left-3 flex items-center gap-2">
+                  <span className="px-3 py-1 rounded-full bg-black/80 backdrop-blur-md text-[#ccff00] text-[10px] font-mono font-bold border border-[#ccff00]/30 shadow-md">
+                    01 // SHIVANJAY
+                  </span>
+                </div>
+
+                {/* Bottom Overlay Label */}
+                <div className="absolute bottom-3 left-3 right-3 flex justify-between items-center text-xs font-mono text-white/90 bg-black/70 backdrop-blur-md px-3 py-2 rounded-xl border border-white/10">
+                  <span className="font-bold">Shivanjay P. Bajpai</span>
+                  <span className="text-[#ccff00] text-[10px]">Full Stack & AI</span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          {/* Right Column - Text Content */}
-          <div className="flex flex-col justify-center space-y-8 z-10 w-full px-4 md:px-0">
+          {/* Right Column - Slightly Reduced Intro Text Card Aligned to Photo */}
+          <div className="flex flex-col justify-center space-y-6 z-10 w-full px-2 md:px-0">
             {/* Desktop Intro Text */}
-            <h2 ref={introDesktopRef} className="hidden lg:block text-[11rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-300 to-gray-800 drop-shadow-2xl leading-none">
+            <h2 ref={introDesktopRef} className="hidden lg:block text-[9rem] xl:text-[10rem] font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white via-gray-300 to-gray-800 drop-shadow-2xl leading-none">
               Intro
             </h2>
-            <div className="relative bg-white/5 backdrop-blur-md p-6 md:p-10 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-white/[0.07] transition-colors duration-300 text-center lg:text-left">
-              <p ref={textRef} className="text-gray-300 text-base md:text-lg lg:text-xl leading-relaxed font-light">
+            
+            {/* Adjusted Text Container Card */}
+            <div className="relative bg-white/5 backdrop-blur-md p-5 sm:p-6 md:p-8 rounded-3xl border border-white/10 shadow-[0_8px_30px_rgb(0,0,0,0.12)] hover:bg-white/[0.07] transition-colors duration-300 text-center lg:text-left">
+              <p ref={textRef} className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed font-light">
                 {aboutWords.map((wordObj, index) => (
                   <React.Fragment key={index}>
                     <span className={`word ${wordObj.className || ''}`}>

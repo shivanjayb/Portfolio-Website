@@ -148,8 +148,8 @@ const Hero = ({ onPreloadComplete }) => {
       >
         <img
           src={centerImage}
-          alt="Hero Center Graphic"
-          className="w-full max-w-md object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+          alt="Shivanjay P. Bajpai"
+          className="w-full max-w-lg md:max-w-xl lg:max-w-2xl max-h-[75vh] md:max-h-[82vh] object-contain drop-shadow-[0_25px_60px_rgba(0,0,0,0.7)]"
         />
       </div>
     </section>
