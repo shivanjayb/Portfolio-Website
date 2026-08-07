@@ -2,7 +2,7 @@
 
 An interactive, high-performance, full-stack & AI engineering portfolio website matching a 1:1 modern design language with GSAP animations, AI background-removed portrait assets, interactive accordion services, and an Electric Neon Lime (`#ccff00`) visual identity.
 
-![Shivanjay Portfolio Preview](public/assets/photos/profile_main.png)
+![Portfolio Preview](public/assets/photos/Website_Preview.png)
 
 ---
 
