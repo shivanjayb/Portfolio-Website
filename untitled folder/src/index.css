@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-caveat {
+    font-family: 'Caveat', cursive;
+  }
+  .font-jakarta {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .text-stroke-white {
+    -webkit-text-stroke: 1.5px white;
+    color: transparent;
+  }
+  .text-stroke-black {
+    -webkit-text-stroke: 1.5px black;
+    color: transparent;
+  }
+  .text-stroke-rose {
+    -webkit-text-stroke: 1.5px #f43f5e;
+    color: transparent;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #09090b;
+  color: #f4f4f5;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Custom AOS drop bounce animation for lanyard badge */
+[data-aos="drop-bounce"] {
+  opacity: 0;
+}
+[data-aos="drop-bounce"].aos-animate {
+  animation: dropBounce 1.2s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+}
+
+@keyframes dropBounce {
+  0% { transform: translateY(-300px); opacity: 0; }
+  50% { transform: translateY(0); opacity: 1; }
+  65% { transform: translateY(-40px); opacity: 1; }
+  80% { transform: translateY(0); opacity: 1; }
+  90% { transform: translateY(-15px); opacity: 1; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.animate-float {
+  animation: float 5s ease-in-out infinite;
+}
+
+/* Custom Scrollbar in Crimson Rose */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #09090b;
+}
+::-webkit-scrollbar-thumb {
+  background: #f43f5e;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #fb7185;
+}
