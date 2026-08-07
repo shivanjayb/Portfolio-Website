@@ -42,22 +42,22 @@ const Hero = () => {
           {/* Status Badge */}
           <div 
             data-aos="fade-down"
-            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-black/60 border border-white/20 text-xs font-mono font-bold tracking-wider text-white uppercase backdrop-blur-md mb-6 shadow-xl"
+            className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-zinc-900/90 border border-white/20 text-xs font-mono font-bold tracking-wider text-white uppercase backdrop-blur-md mb-6 shadow-xl"
           >
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping" />
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 absolute" />
-            <span className="ml-2 font-bold text-red-400">Shivanjay P. Bajpai</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-white animate-ping" />
+            <span className="w-2.5 h-2.5 rounded-full bg-white absolute" />
+            <span className="ml-2 font-bold text-white">Shivanjay P. Bajpai</span>
             <span className="text-white/40">|</span>
-            <span className="text-gray-300">2x TEDx Licensee & AI Engineer</span>
+            <span className="text-zinc-300">2x TEDx Licensee & AI Engineer</span>
           </div>
 
-          {/* Main Heading with Dual Tone Outline Stroke */}
+          {/* Main Heading with Pure White Outline Stroke */}
           <h1 
             data-aos="fade-up"
             className="text-white text-3xl md:text-5xl lg:text-6xl font-black mb-6 tracking-tight leading-[1.1]"
           >
             Hi, I’m a <br />
-            <span className="text-transparent [-webkit-text-stroke:1.5px_#ff2a2a] md:[-webkit-text-stroke:2px_#ff2a2a]">
+            <span className="text-transparent [-webkit-text-stroke:1.5px_white] md:[-webkit-text-stroke:2px_white]">
               Full Stack & AI Engineer
             </span>
           </h1>
@@ -66,7 +66,7 @@ const Hero = () => {
           <p 
             data-aos="fade-up"
             data-aos-delay="200"
-            className="text-white text-sm md:text-lg font-semibold mb-8 max-w-md drop-shadow-md leading-relaxed"
+            className="text-zinc-300 text-sm md:text-lg font-semibold mb-8 max-w-md drop-shadow-md leading-relaxed"
           >
             I build fast, scalable AI systems, computer vision platforms, and modern web applications using React, Python, FastAPI, and PostgreSQL.
           </p>
@@ -79,7 +79,7 @@ const Hero = () => {
           >
             <a
               href="#projects"
-              className="px-6 py-3 rounded-full bg-white text-black font-extrabold text-xs md:text-sm hover:bg-gray-200 transition-all duration-300 transform hover:scale-105 shadow-md flex items-center gap-2"
+              className="px-6 py-3.5 rounded-full bg-white text-black font-extrabold text-xs md:text-sm hover:bg-zinc-200 transition-all duration-300 transform hover:scale-105 shadow-xl flex items-center gap-2"
             >
               <Code className="w-4 h-4" />
               <span>Explore My Work</span>
@@ -87,9 +87,9 @@ const Hero = () => {
             
             <a
               href="#contact"
-              className="px-6 py-3 rounded-full bg-black/40 border border-white text-white font-extrabold text-xs md:text-sm hover:bg-black/60 transition-all duration-300 backdrop-blur-md flex items-center gap-2"
+              className="px-6 py-3.5 rounded-full bg-black/60 border border-white/30 text-white font-extrabold text-xs md:text-sm hover:bg-white hover:text-black transition-all duration-300 backdrop-blur-md flex items-center gap-2"
             >
-              <Sparkles className="w-4 h-4 text-red-400" />
+              <Sparkles className="w-4 h-4 text-white" />
               <span>Contact Me</span>
             </a>
           </div>
@@ -102,14 +102,14 @@ const Hero = () => {
           className="mt-8 md:mt-0 flex flex-row md:flex-col items-center gap-2 md:gap-3 cursor-pointer group self-start md:self-auto"
           onClick={togglePlay}
         >
-          <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/30 bg-black/20 backdrop-blur-md flex justify-center items-center group-hover:scale-110 group-hover:bg-[#ff2a2a] transition-all duration-500 shadow-[0_0_30px_rgba(255,255,255,0.1)] group-hover:shadow-[0_0_40px_rgba(255,42,42,0.6)]">
+          <div className="w-12 h-12 md:w-20 md:h-20 rounded-full border border-white/30 bg-black/40 backdrop-blur-md flex justify-center items-center group-hover:scale-110 group-hover:bg-white group-hover:text-black transition-all duration-500 shadow-[0_0_30px_rgba(255,255,255,0.1)]">
             {isPlaying ? (
-              <Pause className="w-5 h-5 md:w-8 md:h-8 text-white" />
+              <Pause className="w-5 h-5 md:w-8 md:h-8 text-white group-hover:text-black" />
             ) : (
-              <Play className="w-5 h-5 md:w-8 md:h-8 text-white ml-0.5 md:ml-1" />
+              <Play className="w-5 h-5 md:w-8 md:h-8 text-white group-hover:text-black ml-0.5 md:ml-1" />
             )}
           </div>
-          <span className="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-70 group-hover:opacity-100 transition-opacity">
+          <span className="text-white text-[10px] md:text-xs font-bold tracking-widest uppercase opacity-80 group-hover:opacity-100 transition-opacity font-mono">
             {isPlaying ? "Monochrome" : "Color Reel"}
           </span>
         </div>
@@ -123,7 +123,7 @@ const Hero = () => {
       >
         <a href="#about" className="flex flex-col items-center gap-1 text-white/50 hover:text-white transition-colors">
           <div className="animate-bounce p-1 rounded-full border border-white/20 bg-black/50 backdrop-blur-md">
-            <ArrowDown className="w-4 h-4 text-red-400" />
+            <ArrowDown className="w-4 h-4 text-white" />
           </div>
         </a>
       </div>

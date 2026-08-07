@@ -31,29 +31,29 @@ const TagCard = ({ number, title, text, className, aosDelay, aosType, pathLength
       data-aos-delay={aosDelay}
       className={`w-72 sm:w-80 rounded-[2rem] p-2 relative flex flex-col items-center hover:scale-[1.02] transition-all duration-700 z-10 ${className} ${
         isActive
-          ? 'bg-[#ff2a2a] border-2 border-red-400 shadow-[0_20px_50px_rgba(255,42,42,0.4)]'
+          ? 'bg-white border-2 border-white text-black shadow-[0_20px_50px_rgba(255,255,255,0.3)]'
           : 'bg-[#121318] border border-white/10 shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:border-white/20'
       }`}
     >
       {/* Hole punch */}
       <div className="w-5 h-5 bg-gradient-to-br from-zinc-700 to-zinc-900 rounded-full shadow-[inset_0_2px_4px_rgba(0,0,0,0.5)] absolute top-4 border border-zinc-700 z-10 flex items-center justify-center">
-        <div className="w-2 h-2 bg-[#ff2a2a] rounded-full opacity-80" />
+        <div className={`w-2 h-2 rounded-full ${isActive ? 'bg-black' : 'bg-white/60'}`} />
       </div>
 
       {/* Inner card container */}
       <div className={`w-full h-full rounded-[1.5rem] mt-8 p-6 sm:p-8 flex flex-col min-h-[220px] transition-colors duration-700 ${
-        isActive ? 'bg-red-950/60 text-white' : 'bg-[#161720] text-gray-200'
+        isActive ? 'bg-zinc-100 text-black' : 'bg-[#161720] text-zinc-200'
       }`}>
         <span className={`text-xl font-bold mb-2 font-mono transition-colors duration-700 ${
-          isActive ? 'text-red-200' : 'text-gray-500'
+          isActive ? 'text-zinc-600' : 'text-zinc-500'
         }`}>{number}</span>
 
         <h3 className={`text-2xl font-black mb-3 tracking-tight transition-colors duration-700 ${
-          isActive ? 'text-white' : 'text-gray-100'
+          isActive ? 'text-black' : 'text-white'
         }`}>{title}</h3>
 
         <p className={`text-sm leading-relaxed font-normal transition-colors duration-700 ${
-          isActive ? 'text-red-100' : 'text-gray-400'
+          isActive ? 'text-zinc-700 font-medium' : 'text-zinc-400'
         }`}>
           {text}
         </p>
@@ -80,15 +80,15 @@ const Services = () => {
     >
       <div className="max-w-6xl mx-auto relative">
 
-        {/* Header Content - Positioned cleanly on top to prevent text collisions */}
+        {/* Header Content */}
         <div data-aos="fade-up" className="max-w-3xl mb-16 md:mb-24 relative z-20">
-          <div className="inline-block border border-red-500/30 rounded-full px-5 py-1.5 text-xs text-red-400 font-mono font-extrabold uppercase tracking-widest mb-6 shadow-sm bg-red-500/10">
+          <div className="inline-block border border-white/30 rounded-full px-5 py-1.5 text-xs text-white font-mono font-extrabold uppercase tracking-widest mb-6 shadow-sm bg-white/10">
             Engineering Methodology
           </div>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-[1.1] mb-6 tracking-tight">
             From algorithmic vision to production code
           </h2>
-          <p className="text-gray-400 text-base md:text-lg max-w-xl font-medium leading-relaxed">
+          <p className="text-zinc-400 text-base md:text-lg max-w-xl font-medium leading-relaxed">
             We follow a structured, creative, and highly technical approach to turn complex engineering problems into robust full-stack applications.
           </p>
         </div>
@@ -123,7 +123,7 @@ const Services = () => {
             <path
               d="M 650,50 C 400,150 200,250 300,450 C 400,650 750,600 700,800 C 650,1000 400,1000 300,1150"
               fill="none"
-              stroke="#ff2a2a"
+              stroke="white"
               strokeWidth="3"
               strokeDasharray="8 10"
               mask="url(#path-mask)"
@@ -158,7 +158,7 @@ const Services = () => {
             <path
               d="M 2,0 L 2,100"
               fill="none"
-              stroke="#ff2a2a"
+              stroke="white"
               strokeWidth="4"
               strokeDasharray="4 6"
               mask="url(#path-mask-mobile)"
@@ -217,7 +217,7 @@ const Services = () => {
             <div
               data-aos="fade-in"
               data-aos-delay="600"
-              className="hidden md:block absolute top-[1200px] left-[55%] font-caveat text-3xl font-bold text-red-400 rotate-6"
+              className="hidden md:block absolute top-[1200px] left-[55%] font-caveat text-3xl font-bold text-zinc-300 rotate-6"
             >
               Ready to be delivered! 🚀
             </div>

@@ -105,17 +105,14 @@ const Gallery = () => {
     : photos.filter(p => p.category === activeFilter);
 
   return (
-    <section id="gallery" className="bg-[#08080a] py-28 px-6 md:px-12 w-full relative overflow-hidden border-t border-white/10">
+    <section id="gallery" className="bg-[#060608] py-28 px-6 md:px-12 w-full relative overflow-hidden border-t border-white/10 font-sans">
       
-      {/* Rose Glow Backdrop */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-rose-500/10 rounded-full blur-[150px] pointer-events-none" />
-
       <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Section Title */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div data-aos="fade-right">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-rose-500/15 border border-rose-500/30 text-xs font-mono font-bold uppercase tracking-widest text-rose-400 mb-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-mono font-bold uppercase tracking-widest text-white mb-4">
               <Camera className="w-3.5 h-3.5" /> Visual Moments & Highlights
             </div>
             <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight">
@@ -131,8 +128,8 @@ const Gallery = () => {
                 onClick={() => setActiveFilter(filter)}
                 className={`px-4 py-2 rounded-full text-xs font-bold transition-all duration-300 ${
                   activeFilter === filter
-                    ? 'bg-rose-500 text-white shadow-lg shadow-rose-500/30'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    ? 'bg-white text-black shadow-lg'
+                    : 'text-zinc-400 hover:text-white hover:bg-white/5'
                 }`}
               >
                 {filter}
@@ -149,40 +146,40 @@ const Gallery = () => {
               data-aos="fade-up"
               data-aos-delay={index * 80}
               onClick={() => setSelectedPhoto(photo)}
-              className={`group relative bg-[#12131a] p-3.5 rounded-3xl border border-white/10 cursor-pointer hover:border-rose-500/50 transition-all duration-500 hover:shadow-[0_25px_60px_rgba(244,63,94,0.2)] transform ${photo.rotation} hover:rotate-0 hover:scale-[1.03] z-10`}
+              className={`group relative bg-[#12131a] p-3.5 rounded-3xl border border-white/10 cursor-pointer hover:border-white/50 transition-all duration-500 hover:shadow-[0_25px_60px_rgba(255,255,255,0.1)] transform ${photo.rotation} hover:rotate-0 hover:scale-[1.03] z-10`}
             >
-              {/* Image Container with Grayscale to Vivid Color Transition */}
-              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl bg-black">
+              {/* Image Container with Grayscale Transition */}
+              <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl bg-black border border-white/10">
                 <img
                   src={photo.image}
                   alt={photo.title}
-                  className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700 ease-out"
+                  className="w-full h-full object-cover grayscale contrast-125 group-hover:scale-110 transition-all duration-700 ease-out"
                 />
                 
-                {/* Dark Vignette Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 group-hover:opacity-30 transition-opacity duration-300" />
+                {/* Dark Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-80 group-hover:opacity-40 transition-opacity duration-300" />
                 
                 {/* Top Badge Overlay */}
                 <div className="absolute top-3 left-3 flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-full bg-black/70 backdrop-blur-md text-rose-400 text-[10px] font-mono font-bold border border-rose-500/30 shadow-md">
+                  <span className="px-3 py-1 rounded-full bg-black/80 backdrop-blur-md text-white text-[10px] font-mono font-bold border border-white/20 shadow-md">
                     {photo.badge}
                   </span>
                 </div>
 
                 {/* Top Right Zoom Icon Pill */}
-                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/60 backdrop-blur-md border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md">
-                  <Maximize2 className="w-3.5 h-3.5 text-rose-400" />
+                <div className="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/70 backdrop-blur-md border border-white/20 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-md">
+                  <Maximize2 className="w-3.5 h-3.5 text-white" />
                 </div>
               </div>
 
               {/* Card Footer Text */}
               <div className="p-4 pt-4">
                 <div className="flex justify-between items-center mb-1">
-                  <h3 className="text-base font-black text-white group-hover:text-rose-400 transition-colors leading-snug">
+                  <h3 className="text-base font-black text-white group-hover:text-zinc-200 transition-colors leading-snug">
                     {photo.title}
                   </h3>
                 </div>
-                <p className="text-xs text-gray-400 font-medium line-clamp-2">
+                <p className="text-xs text-zinc-400 font-medium line-clamp-2">
                   {photo.caption}
                 </p>
               </div>
@@ -198,7 +195,7 @@ const Gallery = () => {
           <div className="relative max-w-4xl w-full bg-[#121318] border border-white/20 rounded-3xl overflow-hidden shadow-2xl" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => setSelectedPhoto(null)}
-              className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-black/60 text-white hover:bg-rose-500 transition-colors"
+              className="absolute top-4 right-4 z-20 p-2.5 rounded-full bg-black text-white hover:bg-white hover:text-black transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
@@ -208,26 +205,26 @@ const Gallery = () => {
                 <img
                   src={selectedPhoto.image}
                   alt={selectedPhoto.title}
-                  className="w-full max-h-[70vh] object-contain"
+                  className="w-full max-h-[70vh] object-contain grayscale"
                 />
               </div>
 
               <div className="md:w-2/5 p-6 sm:p-8 flex flex-col justify-between bg-[#121318]">
                 <div>
-                  <span className="inline-block px-3 py-1 rounded-full bg-rose-500/20 text-rose-400 font-mono text-xs font-bold mb-4 border border-rose-500/30">
+                  <span className="inline-block px-3 py-1 rounded-full bg-white/10 text-white font-mono text-xs font-bold mb-4 border border-white/20">
                     {selectedPhoto.category}
                   </span>
                   <h3 className="text-2xl font-black text-white mb-3">
                     {selectedPhoto.title}
                   </h3>
-                  <p className="text-gray-300 text-sm leading-relaxed mb-6">
+                  <p className="text-zinc-300 text-sm leading-relaxed mb-6">
                     {selectedPhoto.caption}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-gray-400 font-mono">
+                <div className="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400 font-mono">
                   <span>Shivanjay P. Bajpai</span>
-                  <span className="text-rose-400 font-bold">Verified Moment</span>
+                  <span className="text-white font-bold">Verified Moment</span>
                 </div>
               </div>
             </div>
