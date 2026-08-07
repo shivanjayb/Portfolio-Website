@@ -106,31 +106,31 @@ const Experience = () => {
   ];
 
   return (
-    <section id="experience" className="bg-[#050507] py-32 px-6 md:px-12 w-full relative overflow-hidden border-t border-white/10 font-sans">
+    <section id="experience" className="bg-[#faf8f5] py-32 px-6 md:px-12 w-full relative overflow-hidden border-t border-[#e8e4dc] font-sans">
       <div className="max-w-6xl mx-auto relative z-10">
 
         {/* Header */}
         <div data-aos="fade-up" className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 border border-white/20 text-xs font-mono font-bold uppercase tracking-widest text-white mb-4">
-            <Trophy className="w-3.5 h-3.5" /> Career & Credentials
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20 text-xs font-mono font-bold uppercase tracking-widest text-amber-900 mb-4">
+            <Trophy className="w-3.5 h-3.5 text-amber-700" /> Career & Credentials
           </div>
-          <h2 className="text-4xl sm:text-5xl font-black text-white tracking-tight mb-4">
+          <h2 className="text-4xl sm:text-5xl font-black text-[#1a1917] tracking-tight mb-4">
             Leadership, Education & Certifications
           </h2>
-          <p className="text-zinc-400 text-base">
+          <p className="text-stone-600 text-base">
             Proven track record in engineering, leadership of TEDx events, and continuous learning.
           </p>
         </div>
 
         {/* Tab Selection Navigation */}
         <div data-aos="fade-up" className="flex justify-center mb-16">
-          <div className="flex bg-white/5 p-1.5 rounded-full border border-white/10">
+          <div className="flex bg-white p-1.5 rounded-full border border-[#e8e4dc] shadow-sm">
             <button
               onClick={() => setActiveTab('leadership')}
               className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 ${
                 activeTab === 'leadership'
-                  ? 'bg-white text-black shadow-lg'
-                  : 'text-zinc-400 hover:text-white'
+                  ? 'bg-[#1a1917] text-white shadow-md'
+                  : 'text-stone-600 hover:text-stone-900'
               }`}
             >
               <Users className="w-4 h-4" />
@@ -141,8 +141,8 @@ const Experience = () => {
               onClick={() => setActiveTab('education')}
               className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 ${
                 activeTab === 'education'
-                  ? 'bg-white text-black shadow-lg'
-                  : 'text-zinc-400 hover:text-white'
+                  ? 'bg-[#1a1917] text-white shadow-md'
+                  : 'text-stone-600 hover:text-stone-900'
               }`}
             >
               <GraduationCap className="w-4 h-4" />
@@ -153,8 +153,8 @@ const Experience = () => {
               onClick={() => setActiveTab('certifications')}
               className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-xs sm:text-sm font-bold transition-all duration-300 ${
                 activeTab === 'certifications'
-                  ? 'bg-white text-black shadow-lg'
-                  : 'text-zinc-400 hover:text-white'
+                  ? 'bg-[#1a1917] text-white shadow-md'
+                  : 'text-stone-600 hover:text-stone-900'
               }`}
             >
               <Award className="w-4 h-4" />
@@ -171,27 +171,27 @@ const Experience = () => {
                 key={index}
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
-                className="bg-[#121318] border border-white/10 rounded-3xl p-6 sm:p-8 hover:border-white/40 transition-all duration-300 shadow-xl flex flex-col lg:flex-row gap-8 items-center"
+                className="bg-white border border-[#e8e4dc] rounded-3xl p-6 sm:p-8 hover:border-amber-500/50 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-xl flex flex-col lg:flex-row gap-8 items-center"
               >
                 {/* Text Info */}
                 <div className="flex-1">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-black text-white">{item.title}</h3>
-                      <p className="text-sm font-mono text-zinc-300 font-bold">{item.organization}</p>
+                      <h3 className="text-xl sm:text-2xl font-black text-[#1a1917]">{item.title}</h3>
+                      <p className="text-sm font-mono text-amber-800 font-bold">{item.organization}</p>
                     </div>
-                    <span className="self-start sm:self-auto px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300 font-bold">
+                    <span className="self-start sm:self-auto px-3 py-1 rounded-full bg-stone-100 border border-stone-200 text-xs font-mono text-stone-700 font-bold">
                       {item.period}
                     </span>
                   </div>
 
-                  <p className="text-zinc-300 text-sm sm:text-base leading-relaxed mb-6">
+                  <p className="text-stone-600 text-sm sm:text-base leading-relaxed mb-6">
                     {item.description}
                   </p>
 
                   <div className="flex flex-wrap gap-2">
                     {item.skills.map((skill, i) => (
-                      <span key={i} className="px-3 py-1 rounded-md bg-white/5 text-xs font-mono text-zinc-300 border border-white/10">
+                      <span key={i} className="px-3 py-1 rounded-md bg-stone-100 text-xs font-mono text-stone-700 border border-stone-200">
                         {skill}
                       </span>
                     ))}
@@ -200,15 +200,15 @@ const Experience = () => {
 
                 {/* Photo Highlight Thumbnail */}
                 {item.image && (
-                  <div className="w-full lg:w-72 aspect-[4/3] rounded-2xl overflow-hidden border border-white/10 relative group shrink-0 bg-black">
+                  <div className="w-full lg:w-72 aspect-[4/3] rounded-2xl overflow-hidden border border-[#e8e4dc] relative group shrink-0 bg-stone-100">
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover grayscale contrast-125 group-hover:scale-105 transition-all duration-700"
+                      className="w-full h-full object-cover grayscale contrast-110 group-hover:scale-105 transition-all duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-80" />
-                    <span className="absolute bottom-3 left-3 text-[10px] font-mono text-white font-bold bg-black/80 px-2.5 py-1 rounded-md border border-white/20 flex items-center gap-1">
-                      <ImageIcon className="w-3 h-3 text-white" /> {item.imageCaption}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-80" />
+                    <span className="absolute bottom-3 left-3 text-[10px] font-mono text-white font-bold bg-black/60 px-2.5 py-1 rounded-md border border-white/20 flex items-center gap-1">
+                      <ImageIcon className="w-3 h-3 text-amber-400" /> {item.imageCaption}
                     </span>
                   </div>
                 )}
@@ -225,28 +225,28 @@ const Experience = () => {
                 key={index}
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
-                className="bg-[#121318] border border-white/10 rounded-3xl p-6 sm:p-8 hover:border-white/40 transition-all duration-300 shadow-xl"
+                className="bg-white border border-[#e8e4dc] rounded-3xl p-6 sm:p-8 hover:border-amber-500/50 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-xl"
               >
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
                   <div>
-                    <h3 className="text-xl sm:text-2xl font-black text-white">{item.institution}</h3>
-                    <p className="text-sm font-mono text-zinc-300 font-bold">{item.degree}</p>
+                    <h3 className="text-xl sm:text-2xl font-black text-[#1a1917]">{item.institution}</h3>
+                    <p className="text-sm font-mono text-amber-800 font-bold">{item.degree}</p>
                   </div>
-                  <span className="self-start sm:self-auto px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-mono text-zinc-300 font-bold">
+                  <span className="self-start sm:self-auto px-3 py-1 rounded-full bg-stone-100 border border-stone-200 text-xs font-mono text-stone-700 font-bold">
                     {item.period}
                   </span>
                 </div>
 
-                <p className="text-zinc-300 text-sm sm:text-base leading-relaxed mb-6">
+                <p className="text-stone-600 text-sm sm:text-base leading-relaxed mb-6">
                   {item.details}
                 </p>
 
                 {/* Score Cards */}
                 <div className="flex flex-wrap gap-3">
                   {item.scores.map((s, i) => (
-                    <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/5 border border-white/10">
-                      <span className="text-xs text-zinc-400 font-mono">{s.label}:</span>
-                      <span className="text-sm font-black text-white">{s.score}</span>
+                    <div key={i} className="flex items-center gap-2 px-4 py-2 rounded-xl bg-stone-100 border border-stone-200">
+                      <span className="text-xs text-stone-500 font-mono">{s.label}:</span>
+                      <span className="text-sm font-black text-[#1a1917]">{s.score}</span>
                     </div>
                   ))}
                 </div>
@@ -263,34 +263,34 @@ const Experience = () => {
                 key={index}
                 data-aos="fade-up"
                 data-aos-delay={index * 100}
-                className="bg-[#121318] border border-white/10 rounded-3xl overflow-hidden hover:border-white/40 transition-all duration-300 shadow-xl flex flex-col justify-between"
+                className="bg-white border border-[#e8e4dc] rounded-3xl overflow-hidden hover:border-amber-500/50 transition-all duration-300 shadow-[0_10px_30px_rgba(0,0,0,0.04)] hover:shadow-xl flex flex-col justify-between"
               >
                 {item.image && (
-                  <div className="w-full h-44 bg-black overflow-hidden relative group border-b border-white/10">
+                  <div className="w-full h-44 bg-stone-100 overflow-hidden relative group border-b border-[#e8e4dc]">
                     <img
                       src={item.image}
                       alt={item.title}
-                      className="w-full h-full object-cover grayscale contrast-125 group-hover:scale-105 transition-all duration-700"
+                      className="w-full h-full object-cover grayscale contrast-110 group-hover:scale-105 transition-all duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#121318] via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent" />
                   </div>
                 )}
 
                 <div className="p-6">
                   <div className="flex justify-between items-center mb-3">
-                    <span className="px-2.5 py-1 rounded-md bg-white/10 border border-white/20 text-white text-[10px] font-mono font-bold uppercase">
+                    <span className="px-2.5 py-1 rounded-md bg-amber-500/10 border border-amber-500/20 text-amber-900 text-[10px] font-mono font-bold uppercase">
                       {item.badge}
                     </span>
-                    <span className="text-xs font-mono text-zinc-400 font-bold">{item.date}</span>
+                    <span className="text-xs font-mono text-stone-500 font-bold">{item.date}</span>
                   </div>
 
-                  <h3 className="text-lg font-black text-white mb-2 leading-snug">{item.title}</h3>
-                  <p className="text-xs font-mono text-zinc-400 mb-3">{item.issuer}</p>
-                  <p className="text-xs text-zinc-300 leading-relaxed mb-4">{item.desc}</p>
+                  <h3 className="text-lg font-black text-[#1a1917] mb-2 leading-snug">{item.title}</h3>
+                  <p className="text-xs font-mono text-stone-500 mb-3">{item.issuer}</p>
+                  <p className="text-xs text-stone-600 leading-relaxed mb-4">{item.desc}</p>
                 </div>
 
-                <div className="p-6 pt-0 flex items-center gap-1.5 text-xs text-white font-bold font-mono border-t border-white/5 mt-auto">
-                  <ShieldCheck className="w-4 h-4 text-white" /> Verified Credential
+                <div className="p-6 pt-0 flex items-center gap-1.5 text-xs text-amber-800 font-bold font-mono border-t border-stone-100 mt-auto">
+                  <ShieldCheck className="w-4 h-4 text-amber-700" /> Verified Credential
                 </div>
               </div>
             ))}

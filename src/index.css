@@ -7,12 +7,12 @@
   .font-jakarta {
     font-family: 'Plus Jakarta Sans', sans-serif;
   }
-  .text-stroke-white {
-    -webkit-text-stroke: 1.5px white;
+  .text-stroke-charcoal {
+    -webkit-text-stroke: 1.5px #1a1917;
     color: transparent;
   }
-  .text-stroke-black {
-    -webkit-text-stroke: 1.5px black;
+  .text-stroke-amber {
+    -webkit-text-stroke: 1.5px #d97706;
     color: transparent;
   }
 }
@@ -24,8 +24,8 @@ html {
 body {
   margin: 0;
   padding: 0;
-  background-color: #000000;
-  color: #ffffff;
+  background-color: #faf8f5;
+  color: #1a1917;
   font-family: 'Inter', sans-serif;
 }
 
@@ -55,17 +55,17 @@ body {
   animation: float 5s ease-in-out infinite;
 }
 
-/* Custom Scrollbar in Monochromatic Black & White */
+/* Custom Scrollbar in Warm Amber & Cream */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: #faf8f5;
 }
 ::-webkit-scrollbar-thumb {
-  background: #ffffff;
+  background: #d97706;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #d4d4d8;
+  background: #b45309;
 }
